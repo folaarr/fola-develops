@@ -554,6 +554,7 @@ function togglePassword(buttonClass, inputClass) {
 
 // Open the A.I. menu bar on click (portrait mode only)
 document.querySelector("button.ai-menu").addEventListener("click", function() {
+    document.querySelector("button.send-button").disabled = true;
     const menu = document.querySelector("div.ai-menu");
     menu.classList.remove("slide-left");
     menu.classList.add("slide-right");
@@ -563,6 +564,7 @@ document.querySelector("button.ai-menu").addEventListener("click", function() {
 
 // Close the A.I. menu bar on click (portrait mode only)
 document.querySelector("button.close-ai").addEventListener("click", function() {
+    document.querySelector("button.send-button").disabled = false;
     const menu = document.querySelector("div.ai-menu");
     menu.classList.remove("slide-right");
     menu.classList.add("slide-left");
