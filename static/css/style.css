@@ -2262,6 +2262,7 @@ p, a {
 
     div.messages {
         margin-top: 20vw;
+        margin-bottom: 20vw;
     }
 
     div.user-message {
