@@ -38,6 +38,9 @@ from supplements.email_templates import verify_one, verify_two, reset_one, reset
 from functools import wraps
 from supplements.items_data import things
 # from flask_cors import CORS
+import markdown2
+from bs4 import BeautifulSoup
+import json
 
 
 load_dotenv()
@@ -63,6 +66,8 @@ email = os.environ.get("EMAIL")
 password = os.environ.get("PASSWORD")
 
 video_url = os.environ.get("VIDEO-URL")
+
+gemini_key = os.environ.get("GEMINI_API_KEY")
 
 config = cloudinary.config(secure=True)  # Signed up with the Google account
 
@@ -982,7 +987,31 @@ def ai():
 def ping_ai():
     data = request.get_json()
     message = data.get("message")
-    return jsonify({})
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+    headers = {
+        "Content-Type": "application/json",
+        "X-goog-api-key": gemini_key
+    }
+    data = {
+        "contents": [
+            {
+                "parts": [
+                    {
+                        "text": message
+                    }
+                ]
+            },
+        ]
+    }
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    markdown_text = response.json()["candidates"][0]["content"]["parts"][0]["text"]
+    print(markdown_text)
+    html = markdown2.markdown(markdown_text)
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup.find_all(True):
+        tag["class"] = "text"
+    html_output = soup.prettify()
+    return jsonify({"output": html_output})
 
 
 if __name__ == "__main__":

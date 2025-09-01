@@ -574,9 +574,16 @@ document.querySelector("button.close-ai").addEventListener("click", function() {
 });
 
 
+document.querySelector("form.message-form").addEventListener('submit', function(event) {
+    event.preventDefault();
+});
+
+
 document.querySelector("button.send-button").addEventListener("click", function() {
-    const message = document.querySelector("textarea.message-box").value;
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const message = document.querySelector("textarea.message-box").value
+    document.querySelector("div.user-message").style.display = "block";
+    document.querySelector("p.user-message").innerHTML = message;
     fetch("/ping-ai/api", {
         method: "POST",
         headers: {
@@ -589,6 +596,7 @@ document.querySelector("button.send-button").addEventListener("click", function(
     })
     .then(response => response.json())
     .then(function(data)  {
+        document.querySelector("p.assistant-message").innerHTML = data["output"];
         console.log("A.I. responded!")
     });
 });

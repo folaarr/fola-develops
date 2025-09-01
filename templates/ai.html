@@ -12,19 +12,29 @@
 
 {% block user_body %}
         <div class="ai-holder">
-            <div class="message">
-                <div>
-                    <textarea class="message-box"></textarea>
+            <form class="message-form">
+                <div class="message">
+                    <div>
+                        <textarea class="message-box"></textarea>
+                    </div>
+
+                    <button type="submit" class="send-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill send-svg" viewBox="0 0 16 16">
+                            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+            <div class="messages">
+                <div class="user-message" style="display: none">
+                    <p class="text user-message"></p>
                 </div>
 
-                <button class="send-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill send-svg" viewBox="0 0 16 16">
-                        <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="messages">
-                <div class="user-message">
+                <div class="assistant-message">
+                    <p class="text assistant-message"></p>
+                </div>
+                
+                <!-- <div class="user-message">
                     <p class="text user-message">I saw this offer and i fit for it, i am currently working on the a.i. assistant project now, i have already gotten gemini to respond from my python code by sending prompts through it's api and I'm printing the responses, i have already constructed the textarea for the message box for the interface for the same app, i want to build and a.i. chat assistant with gemini on the backend, and i have styled it with css for mobile, i would like to be a top candidate for this job.</p>
                 </div>
 
@@ -94,7 +104,7 @@
                     One choice between AI/ML or Backend (I picked AI/ML because it aligns best with their mission and your current project).
 
                     Would you like me to also craft a 2–3 sentence “punchy summary” you can reuse for similar job applications, so you don’t have to rewrite each time?</p>
-                </div>
+                </div> -->
             </div>
         </div>
 

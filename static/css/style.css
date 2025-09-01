@@ -4476,11 +4476,11 @@ p, a {
         background: rgba(5, 4, 3, 0.3);
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
-        font-size: 1.2vw;
+        font-size: 1.8vw;
     }
 
     textarea.message-box:focus {
-        font-size: 1.2vw;
+        font-size: 1.8vw;
     }
 
     button.send-button {
