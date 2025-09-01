@@ -9,7 +9,7 @@ from supplements.forms import LoginForm, SignupForm, TestimonyForm, PictureForm,
 # CSRFProtect protects from cross-site-request-forgery https://flask-wtf.readthedocs.io/en/0.15.x/csrf/
 from flask_wtf.csrf import CSRFProtect
 # Import database tables from the entities.py file
-from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Testimony, Item, CartProduct, Order
+from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Testimony, Item, CartProduct, Order, AiChat, AiMessage
 from sqlalchemy import func, desc
 # werkzeug.security hashes passwords
 # https://werkzeug.palletsprojects.com/en/stable/utils/#werkzeug.security.generate_password_hash
@@ -41,6 +41,7 @@ from supplements.items_data import things
 import markdown2
 from bs4 import BeautifulSoup
 import json
+from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat
 
 
 load_dotenv()
@@ -978,6 +979,7 @@ def order(order_point):
 
 
 @app.route("/ai")
+@login_required
 def ai():
     return render_template("ai.html")
 
@@ -987,31 +989,22 @@ def ai():
 def ping_ai():
     data = request.get_json()
     message = data.get("message")
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-    headers = {
-        "Content-Type": "application/json",
-        "X-goog-api-key": gemini_key
-    }
-    data = {
-        "contents": [
-            {
-                "parts": [
-                    {
-                        "text": message
-                    }
-                ]
-            },
-        ]
-    }
-    response = requests.post(url, headers=headers, data=json.dumps(data))
-    markdown_text = response.json()["candidates"][0]["content"]["parts"][0]["text"]
-    print(markdown_text)
-    html = markdown2.markdown(markdown_text)
-    soup = BeautifulSoup(html, "html.parser")
-    for tag in soup.find_all(True):
-        tag["class"] = "text"
-    html_output = soup.prettify()
-    return jsonify({"output": html_output})
+    now = datetime.now()
+    chat = AiChat(datetime=now, user_id=current_user.id)
+    db.session.add(chat)
+    db.session.commit()
+    ai_chat = db.session.execute(db.select(AiChat).where(AiChat.datetime == now)).scalar()
+    system_instruction = AiMessage(role="user", message=system_instructions, chat_id=ai_chat.id)
+    db.session.add(system_instruction)
+    user_message = AiMessage(role="user", message=message, chat_id=ai_chat.id)
+    db.session.add(user_message)
+    ai_reply = chat_ai(message)
+    assistant_message = AiMessage(role="model", message=ai_reply["raw_output"], chat_id=ai_chat.id)
+    db.session.add(assistant_message)
+    if not ai_chat.title:
+        ai_chat.title = identify_chat(ai_chat.id)
+    db.session.commit()
+    return jsonify({"output": ai_reply["html_output"]})
 
 
 if __name__ == "__main__":

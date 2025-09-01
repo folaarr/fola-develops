@@ -45,6 +45,7 @@ class User(UserMixin, db.Model):
     items = relationship("Item", back_populates="user")
     cart_products = relationship("CartProduct", back_populates="user")
     orders = relationship("Order", back_populates="user")
+    ai_chats = relationship("AiChat", back_populates="user")
 
 
 class Testimony(UserMixin, db.Model):
@@ -98,3 +99,22 @@ class Order(UserMixin, db.Model):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     user = relationship("User", back_populates="orders")
     datetime: Mapped[datetime] = mapped_column(DateTime())
+
+
+class AiChat(UserMixin, db.Model):
+    __tablename__ = "ai_chats"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    datetime: Mapped[datetime] = mapped_column(DateTime())
+    title: Mapped[str] = mapped_column(String(), nullable=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    user = relationship("User", back_populates="ai_chats")
+    messages = relationship("AiMessage", back_populates="chat")
+
+
+class AiMessage(UserMixin, db.Model):
+    __tablename__ = "ai messages"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    role: Mapped[str] = mapped_column(String())
+    message: Mapped[str] = mapped_column(String())
+    chat_id: Mapped[int | None] = mapped_column(ForeignKey("ai_chats.id"), nullable=True)
+    chat = relationship("AiChat", back_populates="messages")
