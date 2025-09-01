@@ -132,7 +132,9 @@
                     </svg>
                 </button>
             </div>
-            <div class="text chats-label">Chats</div>
+            {% if chats %}
+                <div class="text chats-label">Chats</div>
+            {% endif %}
             <!-- <button class="old-chat">Legend of Benjamin Burton</button>
             <button class="old-chat">Ahmed the Red Dead Wrestler</button>
             <button class="old-chat">What is takes to make a million</button>
