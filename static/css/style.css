@@ -2296,6 +2296,12 @@ p, a {
         line-height: 4.3vw;
     }
 
+    .assistant-message {
+        font-size: 3.2vw;
+        margin: 0;
+        line-height: 4.3vw;
+    }
+
     button.ai-menu {
         border: none;
         border-radius: 50%;
@@ -4530,6 +4536,12 @@ p, a {
     }
 
     p.assistant-message {
+        font-size: 1.6vw;
+        margin: 0;
+        line-height: 2.15vw;
+    }
+
+    .assistant-message {
         font-size: 1.6vw;
         margin: 0;
         line-height: 2.15vw;

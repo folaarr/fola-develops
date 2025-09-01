@@ -133,10 +133,17 @@
                 </button>
             </div>
             <div class="text chats-label">Chats</div>
-            <button class="old-chat">Legend of Benjamin Burton</button>
+            <!-- <button class="old-chat">Legend of Benjamin Burton</button>
             <button class="old-chat">Ahmed the Red Dead Wrestler</button>
             <button class="old-chat">What is takes to make a million</button>
-            <button class="old-chat">Ace hard head question</button>
+            <button class="old-chat">Ace hard head question</button> -->
+            {% for chat in ai_chats %}
+                {% if chat.user_id == current_user.id %}
+                    <button class="old-chat" data-chat-id="{{ chat.id }}">
+                        {{ chat.title }}
+                    </button>
+                {% endif %}
+            {% endfor %}
 
         </div>
 

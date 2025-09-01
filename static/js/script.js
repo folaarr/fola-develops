@@ -49,6 +49,9 @@ const canceled_eye = [
     '8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 ',
     '12 12z"/></svg>'
 ].join("");
+// Declare A.I. conversational elements
+const userMessage = '<div class="user-message"><p class="text user-message">'
+const assistantMessage = '<div class="assistant-message"><p class="text assistant-message">'
 
 /*
 Show and hide the navigation bar whenever the 'Menu' button is clicked on portrait mode,
@@ -562,8 +565,7 @@ document.querySelector("button.ai-menu").addEventListener("click", function() {
 });
 
 
-// Close the A.I. menu bar on click (portrait mode only)
-document.querySelector("button.close-ai").addEventListener("click", function() {
+function closeNav() {
     document.querySelector("button.send-button").disabled = false;
     const menu = document.querySelector("div.ai-menu");
     menu.classList.remove("slide-right");
@@ -571,6 +573,12 @@ document.querySelector("button.close-ai").addEventListener("click", function() {
     setTimeout(() => {
         menu.style.left = "-66vw";
     }, 300);
+}
+
+
+// Close the A.I. menu bar on click (portrait mode only)
+document.querySelector("button.close-ai").addEventListener("click", function() {
+    closeNav();
 });
 
 
@@ -579,6 +587,7 @@ document.querySelector("form.message-form").addEventListener('submit', function(
 });
 
 
+// Send the A.I. a message
 document.querySelector("button.send-button").addEventListener("click", function() {
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const input = document.querySelector("textarea.message-box");
@@ -604,9 +613,38 @@ document.querySelector("button.send-button").addEventListener("click", function(
         startDelay: 0,
         showCursor: false
         });
-        console.log("A.I. responded!")
     });
 });
 
 
+// Activate all A.I. past-chats' buttons
+document.querySelectorAll("button.old-chat").forEach(function(button) {
+    button.addEventListener("click", function() {
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const chatId = Number(button.getAttribute("data-chat-id"));
+        fetch("/open-chat/api", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": token
+        },
+        body: JSON.stringify({
+            "chat_id": chatId
+        })
+    })
+    .then(response => response.json())
+    .then(function(data)  {
+        var html = "";
+        data["messages"].forEach(function(message) {
+            if (message["role"] === "user") {
+                html += userMessage + message["message"] + "</p></div>"
+            } else if (message["role"] === "model") {
+                html += assistantMessage + message["message"] + "</p></div>"
+            }
+        });
+        document.querySelector("div.messages").innerHTML = html;
+        closeNav();
+    });
+    });
+})
 

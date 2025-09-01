@@ -20,6 +20,14 @@ headers = {
 system_instructions = "Answer should not be more than 325 words."
 
 
+def to_html(markdown_text):
+    html = markdown2.markdown(markdown_text)
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup.find_all(True):
+        tag["class"] = "text assistant-message"
+    return soup.prettify()
+
+
 def chat_ai(mes_sage):
     data = {
         "contents": [
@@ -43,11 +51,7 @@ def chat_ai(mes_sage):
     }
     response = requests.post(url, headers=headers, data=json.dumps(data))
     markdown_text = response.json()["candidates"][0]["content"]["parts"][0]["text"]
-    html = markdown2.markdown(markdown_text)
-    soup = BeautifulSoup(html, "html.parser")
-    for tag in soup.find_all(True):
-        tag["class"] = "text"
-    html_output = soup.prettify()
+    html_output = to_html(markdown_text)
     return {"raw_output": markdown_text, "html_output": html_output}
 
 
@@ -64,7 +68,7 @@ def identify_chat(i_d):
     accumulated_chat = accumulate_chat(i_d)
     accumulated_chat.append({
                 "role": "user",
-                "parts": [{"text": f"Generate a very short title (max 5 words) for this conversation"}]
+                "parts": [{"text": f"Generate a very short title (max 5 words or max 50 characters total) for this conversation"}]
             })
     data = {"contents": accumulated_chat}
     response = requests.post(url, headers=headers, data=json.dumps(data)).json()

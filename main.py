@@ -41,7 +41,7 @@ from supplements.items_data import things
 import markdown2
 from bs4 import BeautifulSoup
 import json
-from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat
+from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, to_html
 
 
 load_dotenv()
@@ -981,7 +981,8 @@ def order(order_point):
 @app.route("/ai")
 @login_required
 def ai():
-    return render_template("ai.html")
+    ai_chats = db.session.execute(db.select(AiChat).order_by(AiChat.datetime.desc())).scalars().all()
+    return render_template("ai.html", ai_chats=ai_chats)
 
 
 @app.route("/ping-ai/api", methods=["POST"])
@@ -999,12 +1000,25 @@ def ping_ai():
     user_message = AiMessage(role="user", message=message, chat_id=ai_chat.id)
     db.session.add(user_message)
     ai_reply = chat_ai(message)
-    assistant_message = AiMessage(role="model", message=ai_reply["raw_output"], chat_id=ai_chat.id)
+    assistant_message = AiMessage(role="model", message=ai_reply["raw_output"], message_html=ai_reply["html_output"], chat_id=ai_chat.id)
     db.session.add(assistant_message)
     if not ai_chat.title:
         ai_chat.title = identify_chat(ai_chat.id)
     db.session.commit()
     return jsonify({"output": ai_reply["html_output"]})
+
+
+@app.route("/open-chat/api", methods=["POST"])
+@login_required
+def open_chat():
+    data = request.get_json()
+    chat_id = data.get("chat_id")
+    ai_chat = db.session.execute(db.select(AiChat).where(AiChat.id == chat_id)).scalar()
+    ai_chat.datetime = datetime.now()
+    db.session.commit()
+    chat_messages = ai_chat.messages
+    messages = [{"role": message.role, "message": message.message} if message.role == "user" else {"role": message.role, "message": message.message_html} for message in chat_messages if chat_messages.index(message) != 0]
+    return jsonify({"messages": messages})
 
 
 if __name__ == "__main__":

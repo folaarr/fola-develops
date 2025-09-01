@@ -116,5 +116,6 @@ class AiMessage(UserMixin, db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     role: Mapped[str] = mapped_column(String())
     message: Mapped[str] = mapped_column(String())
+    message_html: Mapped[str] = mapped_column(String(), nullable=True)
     chat_id: Mapped[int | None] = mapped_column(ForeignKey("ai_chats.id"), nullable=True)
     chat = relationship("AiChat", back_populates="messages")
