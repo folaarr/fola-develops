@@ -5,11 +5,11 @@ from flask import Flask, render_template, redirect, url_for, request, flash, jso
 # os is where the secrets are saved, like developer passwords and api keys
 import os
 # Import forms from the forms.py file
-from forms import LoginForm, SignupForm, TestimonyForm, PictureForm, SettingsForm, VerifyForm, EmailForm, NewPasswordForm, ItemForm
+from supplements.forms import LoginForm, SignupForm, TestimonyForm, PictureForm, SettingsForm, VerifyForm, EmailForm, NewPasswordForm, ItemForm
 # CSRFProtect protects from cross-site-request-forgery https://flask-wtf.readthedocs.io/en/0.15.x/csrf/
 from flask_wtf.csrf import CSRFProtect
 # Import database tables from the entities.py file
-from entities import db, UnverifiedUser, User, PasswordChanger, Testimony, Item, CartProduct, Order
+from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Testimony, Item, CartProduct, Order
 from sqlalchemy import func, desc
 # werkzeug.security hashes passwords
 # https://werkzeug.palletsprojects.com/en/stable/utils/#werkzeug.security.generate_password_hash
@@ -34,9 +34,9 @@ import random
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email_templates import verify_one, verify_two, reset_one, reset_two, email_brand, before_greeting, before_datetime, after_datetime, before_number, before_image, before_name, before_quantity, before_price, after_price, before_total, after_total
+from supplements.email_templates import verify_one, verify_two, reset_one, reset_two, email_brand, before_greeting, before_datetime, after_datetime, before_number, before_image, before_name, before_quantity, before_price, after_price, before_total, after_total
 from functools import wraps
-from items_data import things
+from supplements.items_data import things
 # from flask_cors import CORS
 
 
@@ -975,6 +975,14 @@ def order(order_point):
 @app.route("/ai")
 def ai():
     return render_template("ai.html")
+
+
+@app.route("/ping-ai/api", methods=["POST"])
+@login_required
+def ping_ai():
+    data = request.get_json()
+    message = data.get("message")
+    return jsonify({})
 
 
 if __name__ == "__main__":

@@ -574,15 +574,24 @@ document.querySelector("button.close-ai").addEventListener("click", function() {
 });
 
 
-// // Get data from the database by fetching data from the Flask server
-//$(".betan").click(function () {
-//    fetch("http://127.0.0.1:5000/flow/api").then(function (response) {
-//        return response.json();
-//    }).then(function (data) {
-//        $(".details-shower").html([
-//            ("Your first name is " + data["first name"] + ", your last name "),
-//            ("is " + data["last name"] + ", and your email is " + data["email"] + ", "),
-//            ("Your is image is " + "<img width='500vw' height='500vw' src='" + data["picture url"] + "'>" )
-//        ].join(""));
-//    })
-//})
+document.querySelector("button.send-button").addEventListener("click", function() {
+    const message = document.querySelector("textarea.message-box").value;
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    fetch("/ping-ai/api", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": token
+        },
+        body: JSON.stringify({
+            "message": message
+        })
+    })
+    .then(response => response.json())
+    .then(function(data)  {
+        console.log("A.I. responded!")
+    });
+});
+
+
+

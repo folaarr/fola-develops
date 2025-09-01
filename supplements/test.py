@@ -113,7 +113,6 @@
 from flask import Flask, render_template
 # from flask_cors import CORS
 import os
-from openai import OpenAI
 from dotenv import load_dotenv
 import markdown2
 from bs4 import BeautifulSoup

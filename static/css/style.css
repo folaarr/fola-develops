@@ -2222,7 +2222,7 @@ p, a {
         bottom: 18vw;
         display: flex;
         justify-content: space-between;
-        /* z-index: 0; */
+        z-index: 1;
     }
 
     textarea.message-box {
@@ -4461,6 +4461,7 @@ p, a {
         left: 33vw;
         display: flex;
         justify-content: space-between;
+        z-index: 1;
     }
 
     textarea.message-box {
@@ -4496,6 +4497,11 @@ p, a {
         width: 2.25vw;
         height: 2.25vw;
         color: #E7F2E4;
+    }
+
+    div.messages {
+        margin-top: 10vw;
+        margin-bottom: 10vw;
     }
 
     div.user-message {
