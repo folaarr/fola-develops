@@ -1,4 +1,4 @@
-# Answer should not be more than 250 words.
+# Aanswer should not be more than 325 words.
 
 data = {
     "contents": [
