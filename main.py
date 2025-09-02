@@ -738,7 +738,6 @@ def item(unique_name):
 @app.route("/load-item/api")
 @login_required
 def load_item():
-
     return jsonify({})
 
 
@@ -1016,6 +1015,19 @@ def ping_ai():
         })
 
 
+@app.route("/open-chat/api", methods=["POST"])
+@login_required
+def open_chat():
+    data = request.get_json()
+    chat_id = data.get("chat_id")
+    ai_chat = db.session.execute(db.select(AiChat).where(AiChat.id == chat_id)).scalar()
+    ai_chat.datetime = datetime.now()
+    db.session.commit()
+    chat_messages = ai_chat.messages
+    messages = [{"role": message.role, "message": message.message} if message.role == "user" else {"role": message.role, "message": message.message_html} for message in chat_messages if chat_messages.index(message) != 0]
+    return jsonify({"messages": messages, "chat_id": ai_chat.id})
+
+
 @app.route("/update-ai/api", methods=["POST"])
 @login_required
 def update_ai():
@@ -1032,19 +1044,6 @@ def update_ai():
     db.session.add(assistant_message)
     db.session.commit()
     return jsonify({"output": ai_reply["html_output"], "message_id": statement.id})
-
-
-@app.route("/open-chat/api", methods=["POST"])
-@login_required
-def open_chat():
-    data = request.get_json()
-    chat_id = data.get("chat_id")
-    ai_chat = db.session.execute(db.select(AiChat).where(AiChat.id == chat_id)).scalar()
-    ai_chat.datetime = datetime.now()
-    db.session.commit()
-    chat_messages = ai_chat.messages
-    messages = [{"role": message.role, "message": message.message} if message.role == "user" else {"role": message.role, "message": message.message_html} for message in chat_messages if chat_messages.index(message) != 0]
-    return jsonify({"messages": messages, "chat_id": ai_chat.id})
 
 
 if __name__ == "__main__":
