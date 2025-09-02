@@ -4572,5 +4572,151 @@ p, a {
         line-height: 2.15vw;
     }
 
+    button.ai-menu {
+        border: none;
+        border-radius: 50%;
+        width: 5.25vw;
+        height: 5.25vw;
+        background: #2b3035;
+        position: fixed;
+        top: 7.875vw;
+        left: 21vw;
+    }
+
+    svg.ai-svg {
+        width: 2.25vw;
+        height: 2.25vw;
+        color: #E7F2E4;
+    }
+
+    div.ai-menu {
+        background: #2b3035;
+        height: 70vh;
+        padding-bottom: 30vh;
+        z-index: 1;
+        width: 33vw;
+        padding-top: 6.5vw;
+        position: fixed;
+        top: 0;
+        left: -33vw;
+        overflow-y: auto;
+    }
+
+    div.ai-greeting {
+        width: 81vw;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h2.ai-greeting {
+        font-weight: 500;
+        font-size: 3.5vw;
+    }
+
+    @keyframes slideRight {
+        0% {
+            transform: translateX(-33vw);
+        }
+
+        100% {
+            transform: translateX(0vw);
+        }
+    }
+
+    div.ai-menu.slide-right {
+        animation-name: slideRight;
+        animation-duration: 0.33s;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in;
+    }
+
+    @keyframes slideLeft {
+        0% {
+            transform: translateX(0vw);
+        }
+
+        100% {
+            transform: translateX(-33vw);
+        }
+    }
+
+    div.ai-menu.slide-left {
+        animation-name: slideLeft;
+        animation-duration: 0.33s;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+    }
+
+    div.close-ai {
+        width: 33vw;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2vw;
+    }
+
+    svg.bot {
+        width: 2.25vw;
+        height: 2.25vw;
+        color: #E7F2E4;
+        padding: 0.825vw 1.75vw;
+    }
+
+    button.new-chat {
+        background: transparent;
+        /* padding: 0.825vw 1.75vw; */
+        font-size: 1.6vw;
+        border: none;
+        color: #E7F2E4;
+        display: flex;
+        white-space: pre;
+        height: 3.9vw;
+        align-items: center;
+        margin-left: 1.25vw;
+    }
+
+    svg.new-chat {
+        width: 2.25vw;
+        height: 2.25vw;
+        color: #E7F2E4;
+    }
+
+    button.close-ai {
+        border: none;
+        background: transparent;
+        padding: 0.825vw 1.75vw;
+    }
+
+    svg.close-ai {
+        width: 2.25vw;
+        height: 2.25vw;
+        color: #E7F2E4;
+    }
+
+    div.chats-label {
+        background: transparent;
+        border: none;
+        /* border-top: 0.1vw solid #E7F2E4; */
+        padding: 1vw 2vw;
+        width: 29vw;
+        font-size: 1.45vw;
+        color: #89918C;
+        text-align: left;
+        /* margin-top: 4vw; */
+        /* border-top: 0.1vw solid #E7F2E4; */
+    }
+
+    button.old-chat {
+        background: transparent;
+        border: none;
+        /* border-top: 0.1vw solid #E7F2E4; */
+        padding: 1vw 1vw;
+        width: 33vw;
+        font-size: 1.6vw;
+        color: #E7F2E4;
+        text-align: left;
+    }
+
 
 }
