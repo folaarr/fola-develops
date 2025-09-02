@@ -52,6 +52,7 @@ app.config["SECRET_KEY"] = os.environ.get("FLASK-SECRET-KEY")
 csrf = CSRFProtect(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE-URI")
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
 db.init_app(app)
 
 app.config["UPLOAD_FOLDER"] = "static/images/uploads"
