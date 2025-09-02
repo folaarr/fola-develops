@@ -4,16 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}"> -->
 </head>
 <body>
-    <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px; background-color: #f9f9f9; max-width: 400px; margin-top: 1rem;">
-  <strong>Don’t want to sign up?</strong>
-  <p>You can log in with this demo account:</p>
-  <ul style="list-style: none; padding: 0; margin: 0;">
-    <li><strong>Email:</strong> <code>view@foladevelops.onrender.com</code></li>
-    <li><strong>Password:</strong> <code>View123</code></li>
-  </ul>
+
+  <!-- <div class="typer" style="background: blue;"></div>
+  <div class="typer" style="background: yellow;"></div> -->
+  
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <script>
+        var typed = new Typed(".typer", {
+        strings: [
+            "developing", 
+            "programming", 
+            "building", 
+            "coding",
+            "designing",
+            "architecting",
+            "debugging",
+            "testing",
+            "deploying",
+            "maintaining"
+        ],
+        typeSpeed: 100,
+        backSpeed: 50,
+        startDelay: 2000,
+        loop: true,
+        });
+    </script>
 </div>
 </body>
 </html>

@@ -2265,11 +2265,20 @@ p, a {
         margin-bottom: 20vw;
     }
 
-    div.user-message {
+    div.user-question {
         margin-left: 20vw;
-        padding: 2vw;
         width: 72.6vw;
         margin-right: 3vw;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    div.user-message {
+        /* margin-left: 20vw; */
+        padding: 2vw;
+        /* width: 72.6vw; */
+        /* margin-right: 3vw; */
+        width: fit-content;
         border-radius: 2.5vw;
         border: 0.2vw solid #E7F2E4;
         background: rgba(43, 48, 54, 0.3);

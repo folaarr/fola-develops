@@ -8,6 +8,7 @@
             background-image: url({{ url_for('static', filename='images/keyboard.jpg') }});
         }
     </style>
+    
 {% endblock %}
 
 {% block user_body %}
@@ -26,85 +27,15 @@
                 </div>
             </form>
             <div class="messages">
-                <div class="user-message" style="display: none">
-                    <p class="text user-message"></p>
+                <div class="user-question">
+                    <div class="user-message" style="display: none">
+                        <p class="text user-message"></p>
+                    </div>
                 </div>
 
                 <div class="assistant-message">
                     <p class="text assistant-message"></p>
                 </div>
-                
-                <!-- <div class="user-message">
-                    <p class="text user-message">I saw this offer and i fit for it, i am currently working on the a.i. assistant project now, i have already gotten gemini to respond from my python code by sending prompts through it's api and I'm printing the responses, i have already constructed the textarea for the message box for the interface for the same app, i want to build and a.i. chat assistant with gemini on the backend, and i have styled it with css for mobile, i would like to be a top candidate for this job.</p>
-                </div>
-
-                <div class="assistant-message">
-                    <p class="text assistant-message">Perfect, thanks for clarifying 👍 That means we’ll keep it short and sharp where the form forces a number or a single choice. Here’s the optimized version of your application answers:
-
-                    Full Name:
-                    Folajimi Abolade
-
-                    Email Address:
-                    [your email]
-
-                    Location:
-                    Abeokuta, Ogun State, Nigeria
-
-                    LinkedIn / Personal Website / GitHub:
-
-                    LinkedIn: [your LinkedIn URL]
-
-                    GitHub: https://github.com/folajimiabolade
-
-                    Project: https://webbuildhq.onrender.com
-
-                    Javascript knowledge (0–5):
-                    3
-
-                    Python knowledge (0–5):
-                    4
-
-                    Specific JS/Python libraries/frameworks:
-
-                    Python: Flask, SQLAlchemy, Requests
-
-                    JavaScript: jQuery, React (learning)
-
-                    CSS: Flexbox, Grid, responsive design
-
-                    Overall programming knowledge (0–5):
-                    4
-
-                    Career focus (choose one):
-                    AI/ML
-
-                    Experience with version control (Git):
-                    Intermediate
-
-                    Past experience (brief):
-
-                    Full-stack developer (1 year).
-
-                    Built and deployed responsive web apps with Flask, SQLAlchemy, HTML, CSS, JavaScript.
-
-                    WebBuild HQ: User upload & interaction platform with PostgreSQL, Nginx, Gunicorn, Cloudinary.
-
-                    AI Assistant (in progress): Chat assistant using Python backend + Gemini API with a styled frontend.
-
-                    English level (reading/writing):
-                    Advanced
-
-                    Anything else to know:
-                    I am passionate about building AI-powered applications and already have hands-on experience integrating LLM APIs (Gemini) into real-world projects. I combine Python backend expertise with frontend development skills, and I’m eager to learn quickly, contribute to your AI products, and grow with your team.
-
-                    ⚡ This version matches exactly how the form is structured:
-
-                    Numbers only where required.
-
-                    One choice between AI/ML or Backend (I picked AI/ML because it aligns best with their mission and your current project).
-
-                    Would you like me to also craft a 2–3 sentence “punchy summary” you can reuse for similar job applications, so you don’t have to rewrite each time?</p>
-                </div> -->
             </div>
         </div>
 
@@ -135,10 +66,6 @@
             {% if ai_chats %}
                 <div class="text chats-label">Chats</div>
             {% endif %}
-            <!-- <button class="old-chat">Legend of Benjamin Burton</button>
-            <button class="old-chat">Ahmed the Red Dead Wrestler</button>
-            <button class="old-chat">What is takes to make a million</button>
-            <button class="old-chat">Ace hard head question</button> -->
             {% for chat in ai_chats %}
                 {% if chat.user_id == current_user.id %}
                     <button class="old-chat" data-chat-id="{{ chat.id }}">
@@ -146,9 +73,7 @@
                     </button>
                 {% endif %}
             {% endfor %}
-
         </div>
-
     
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 

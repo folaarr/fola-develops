@@ -75,3 +75,12 @@ def identify_chat(i_d):
     print(response)
     return response["candidates"][0]["content"]["parts"][0]["text"]
     
+
+def message_ai(contents, new_message):
+    initial_contents = contents
+    initial_contents.append({"role": "user", "parts": [{"text": new_message}]})
+    data = {"contents": [initial_contents]}
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    markdown_text = response.json()["candidates"][0]["content"]["parts"][0]["text"]
+    html_output = to_html(markdown_text)
+    return {"raw_output": markdown_text, "html_output": html_output}

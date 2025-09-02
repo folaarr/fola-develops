@@ -41,7 +41,7 @@ from supplements.items_data import things
 import markdown2
 from bs4 import BeautifulSoup
 import json
-from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, to_html
+from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
 
 
 load_dotenv()
@@ -1006,7 +1006,24 @@ def ping_ai():
     if not ai_chat.title:
         ai_chat.title = identify_chat(ai_chat.id)
     db.session.commit()
-    return jsonify({"output": ai_reply["html_output"]})
+    return jsonify({"output": ai_reply["html_output"], "chat_id": ai_chat.id})
+
+
+@app.route("/update-ai/api", methods=["POST"])
+@login_required
+def update_ai():
+    data = request.get_json()
+    chat_id = data.get("chat_id")
+    message = data.get("message")
+    initial_contents = accumulate_chat(chat_id)
+    ai_reply = message_ai(initial_contents, message)
+    user_message = AiMessage(role="user", message=message, chat_id=chat_id)
+    db.session.add(user_message)
+    statement = db.session.execute(db.select(AiMessage).where(AiMessage.message == message)).scalar()
+    assistant_message = AiMessage(role="model", message=ai_reply["raw_output"], message_html=ai_reply["html_output"], chat_id=chat_id)
+    db.session.add(assistant_message)
+    db.session.commit()
+    return jsonify({"output": ai_reply["html_output"], "message_id": statement.id})
 
 
 @app.route("/open-chat/api", methods=["POST"])
@@ -1019,7 +1036,7 @@ def open_chat():
     db.session.commit()
     chat_messages = ai_chat.messages
     messages = [{"role": message.role, "message": message.message} if message.role == "user" else {"role": message.role, "message": message.message_html} for message in chat_messages if chat_messages.index(message) != 0]
-    return jsonify({"messages": messages})
+    return jsonify({"messages": messages," chat_id": ai_chat.id})
 
 
 if __name__ == "__main__":
