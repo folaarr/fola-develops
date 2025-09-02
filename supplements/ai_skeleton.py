@@ -68,11 +68,10 @@ def identify_chat(i_d):
     accumulated_chat = accumulate_chat(i_d)
     accumulated_chat.append({
                 "role": "user",
-                "parts": [{"text": f"Generate a very short title (max 5 words or max 50 characters total) for this conversation"}]
+                "parts": [{"text": f"Generate a very short title (max 5 words or max 50 characters total) for this conversation, I am creating an application and using you as the API, I am setting your response as the title of this chat on the side bar, i don't want the title on the sidebar to be more than one line, don't give me title options, just give me one, I want to copy your response and render it as the title directly and it must not be more than 5 words, just respond with the title, all messages that will come from my end next will be messages from a new chat which your title will be used to tag"}]
             })
     data = {"contents": accumulated_chat}
     response = requests.post(url, headers=headers, data=json.dumps(data)).json()
-    print(response)
     return response["candidates"][0]["content"]["parts"][0]["text"]
     
 

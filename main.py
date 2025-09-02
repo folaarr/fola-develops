@@ -991,6 +991,8 @@ def ai():
 def ping_ai():
     data = request.get_json()
     message = data.get("message")
+    chats = current_user.ai_chats
+    no_chats = not chats
     now = datetime.now()
     chat = AiChat(datetime=now, user_id=current_user.id)
     db.session.add(chat)
@@ -1006,7 +1008,12 @@ def ping_ai():
     chat_title = identify_chat(ai_chat.id)
     ai_chat.title = chat_title
     db.session.commit()
-    return jsonify({"output": ai_reply["html_output"], "chat_id": ai_chat.id, "chat_title": chat_title})
+    return jsonify({
+        "output": ai_reply["html_output"], 
+        "chat_id": ai_chat.id, 
+        "chat_title": chat_title, 
+        "no_chats": no_chats
+        })
 
 
 @app.route("/update-ai/api", methods=["POST"])
@@ -1015,6 +1022,7 @@ def update_ai():
     data = request.get_json()
     chat_id = data.get("chat_id")
     message = data.get("message")
+    print(f" our id is {chat_id}")
     initial_contents = accumulate_chat(chat_id)
     ai_reply = message_ai(initial_contents, message)
     user_message = AiMessage(role="user", message=message, chat_id=chat_id)
@@ -1036,7 +1044,7 @@ def open_chat():
     db.session.commit()
     chat_messages = ai_chat.messages
     messages = [{"role": message.role, "message": message.message} if message.role == "user" else {"role": message.role, "message": message.message_html} for message in chat_messages if chat_messages.index(message) != 0]
-    return jsonify({"messages": messages," chat_id": ai_chat.id})
+    return jsonify({"messages": messages, "chat_id": ai_chat.id})
 
 
 if __name__ == "__main__":

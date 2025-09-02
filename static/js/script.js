@@ -626,11 +626,17 @@ document.querySelector("button.send-button").addEventListener("click", function(
             showCursor: false
             });
             chatButton.setAttribute("data-chat-id", data["chat_id"]);
+            const parentElement = document.querySelector('div.ai-menu');
+            if (data["no_chats"] === true) {
+                const chatsLabel = document.createElement("div");
+                chatsLabel.classList.add("text", "chats-label"); 
+                chatsLabel.textContent = "Chats";
+                parentElement.appendChild(chatsLabel)
+            }
             const chat = document.createElement("button");
             chat.classList.add("old-chat");
             chat.setAttribute('data-chat-id', data["chat_id"]);
             chat.textContent = data["chat_title"];
-            const parentElement = document.querySelector('div.ai-menu');
             const referenceChild = document.querySelector('button.old-chat');
             parentElement.insertBefore(chat, referenceChild);
             activateChatButton(chat);

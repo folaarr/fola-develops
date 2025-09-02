@@ -2221,7 +2221,8 @@ p, a {
         position: fixed;
         bottom: 18vw;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 2vw;
         z-index: 1;
     }
 
