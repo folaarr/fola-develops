@@ -2330,13 +2330,28 @@ p, a {
 
     div.ai-menu {
         background: #2b3035;
-        height: 100vh;
+        height: 70vh;
+        padding-bottom: 30vh;
         z-index: 1;
         width: 66vw;
         padding-top: 13vw;
         position: fixed;
         top: 0;
         left: -66vw;
+        overflow-y: auto;
+    }
+
+    div.ai-greeting {
+        width: 100vw;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h2.ai-greeting {
+        font-weight: 500;
+        font-size: 7vw;
     }
 
     @keyframes slideRight {

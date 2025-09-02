@@ -13,7 +13,10 @@
 
 {% block user_body %}
         <div class="ai-holder">
-            <form class="message-form">
+            <div class="ai-greeting">
+                <h2 class="text ai-greeting">Hello, {{ current_user.first_name }}</h1>
+            </div>
+                <form class="message-form">
                 <div class="message">
                     <div>
                         <textarea class="message-box"></textarea>

@@ -1003,10 +1003,10 @@ def ping_ai():
     ai_reply = chat_ai(message)
     assistant_message = AiMessage(role="model", message=ai_reply["raw_output"], message_html=ai_reply["html_output"], chat_id=ai_chat.id)
     db.session.add(assistant_message)
-    if not ai_chat.title:
-        ai_chat.title = identify_chat(ai_chat.id)
+    chat_title = identify_chat(ai_chat.id)
+    ai_chat.title = chat_title
     db.session.commit()
-    return jsonify({"output": ai_reply["html_output"], "chat_id": ai_chat.id})
+    return jsonify({"output": ai_reply["html_output"], "chat_id": ai_chat.id, "chat_title": chat_title})
 
 
 @app.route("/update-ai/api", methods=["POST"])

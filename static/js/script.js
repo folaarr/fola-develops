@@ -587,6 +587,7 @@ document.querySelector("form.message-form").addEventListener('submit', function(
 });
 
 
+
 // Send the A.I. a message
 document.querySelector("button.send-button").addEventListener("click", function() {
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -596,8 +597,11 @@ document.querySelector("button.send-button").addEventListener("click", function(
         const input = document.querySelector("textarea.message-box");
         const message = input.value;
         input.value = "";
-        document.querySelector("div.user-message").style.display = "block";
-        document.querySelector("p.user-message").innerHTML = message;
+        document.querySelector("div.ai-greeting").style.display = "none";
+        const userMessage = document.createElement("div");
+        userMessage.classList.add("user-question");
+        userMessage.innerHTML = "<div class='user-message'><p class='text user-message'>" + message + "</p></div>";
+        document.querySelector("div.messages").appendChild(userMessage);
         fetch("/ping-ai/api", {
             method: "POST",
             headers: {
@@ -610,13 +614,26 @@ document.querySelector("button.send-button").addEventListener("click", function(
         })
         .then(response => response.json())
         .then(function(data)  {
-            var typed =  new Typed("p.assistant-message", {
+            const elementsClass = "assistant-message";
+            const assistantMessage = document.createElement("div");
+            assistantMessage.classList.add(elementsClass);
+            assistantMessage.innerHTML = "<p class='text assistant-message id-" + data["message_id"] + "'></p>";
+            document.querySelector("div.messages").appendChild(assistantMessage);
+            var typed =  new Typed("p.assistant-message.id-" + data["message_id"], {
             strings: [data["output"]],
             typeSpeed: 5,
             startDelay: 0,
             showCursor: false
             });
-            chatButton.setAttribute("data-chat-id", data["chat_id"])
+            chatButton.setAttribute("data-chat-id", data["chat_id"]);
+            const chat = document.createElement("button");
+            chat.classList.add("old-chat");
+            chat.setAttribute('data-chat-id', data["chat_id"]);
+            chat.textContent = data["chat_title"];
+            const parentElement = document.querySelector('div.ai-menu');
+            const referenceChild = document.querySelector('button.old-chat');
+            parentElement.insertBefore(chat, referenceChild);
+            activateChatButton(chat);
         });
     } else {
         const input = document.querySelector("textarea.message-box");
@@ -642,7 +659,7 @@ document.querySelector("button.send-button").addEventListener("click", function(
             const elementsClass = "assistant-message";
             const assistantMessage = document.createElement("div");
             assistantMessage.classList.add(elementsClass);
-            assistantMessage.innerHTML = "<p class='text assistant-message id-" + data["message_id"] + "'>Jivo</p>";
+            assistantMessage.innerHTML = "<p class='text assistant-message id-" + data["message_id"] + "'></p>";
             document.querySelector("div.messages").appendChild(assistantMessage);
             var typed =  new Typed("p.assistant-message.id-" + data["message_id"], {
             strings: [data["output"]],
@@ -656,26 +673,11 @@ document.querySelector("button.send-button").addEventListener("click", function(
 });
 
 
-
-        // const divi = document.createElement("div");
-        // divi.classList.add("user-question");
-        // divi.innerHTML = "<div class='user-message'><p class='text user-message'>Jivo</p></div>";
-        // document.querySelector("div.messages").appendChild(divi);
-
-// Send the A.I. supplementry message
-    
-
-    // const pageName = document.querySelector('meta[name="page-name"]').getAttribute("content");
-
-    // if (pageName === "store" || "cart" || "item" || "checkout" || "orders" || "order") {
-
-
-
-// Activate all A.I. past-chats' buttons
-document.querySelectorAll("button.old-chat").forEach(function(button) {
-    button.addEventListener("click", function(event) {
+function activateChatButton(accessPoint) {
+    accessPoint.addEventListener("click", function(event) {
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const chatId = Number(button.getAttribute("data-chat-id"));
+        document.querySelector("div.ai-greeting").style.display = "none";
+        const chatId = Number(accessPoint.getAttribute("data-chat-id"));
         fetch("/open-chat/api", {
         method: "POST",
         headers: {
@@ -706,5 +708,27 @@ document.querySelectorAll("button.old-chat").forEach(function(button) {
             chatButton.setAttribute('data-chat-id', data["chat_id"]);
         });
     });
+}
+
+
+// Activate all A.I. past-chats' buttons
+document.querySelectorAll("button.old-chat").forEach(function(button) {
+    activateChatButton(button);
 })
+
+
+// Initiate a new A.I. chat
+document.querySelector("button.new-chat").addEventListener("click", function() {
+    document.querySelector("button.send-button").setAttribute("data-chat-id", 0);
+    document.querySelectorAll("div.user-question").forEach(function(div) {
+        div.style.display = "none";
+    })
+    document.querySelectorAll("div.assistant-message").forEach(function(div) {
+        div.style.display = "none";
+    })
+    
+    document.querySelector("div.ai-greeting").style.display = "flex";
+    window.scrollTo(0, 0);
+    closeNav();
+});
 
