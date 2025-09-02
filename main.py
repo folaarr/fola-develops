@@ -1022,7 +1022,7 @@ def update_ai():
     data = request.get_json()
     chat_id = data.get("chat_id")
     message = data.get("message")
-    print(f" our id is {chat_id}")
+    print(f"our id is {chat_id}")
     initial_contents = accumulate_chat(chat_id)
     ai_reply = message_ai(initial_contents, message)
     user_message = AiMessage(role="user", message=message, chat_id=chat_id)

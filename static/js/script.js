@@ -673,12 +673,13 @@ document.querySelector("button.send-button").addEventListener("click", function(
             startDelay: 0,
             showCursor: false
             });
-            chatButton.setAttribute("data-chat-id", data["chat_id"])
+            chatButton.setAttribute("data-chat-id", chatId)
         });
     }
 });
 
 
+// Activate A.I. past-chat's button
 function activateChatButton(accessPoint) {
     accessPoint.addEventListener("click", function(event) {
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -714,7 +715,7 @@ function activateChatButton(accessPoint) {
             parentElement.insertBefore(event.target, referenceChild);
             closeNav();
             const chatButton = document.querySelector("button.send-button");
-            chatButton.setAttribute('data-chat-id', data["chat_id"]);
+            chatButton.setAttribute('data-chat-id', chatId);
         });
     });
 }
