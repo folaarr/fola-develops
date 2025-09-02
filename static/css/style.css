@@ -4627,7 +4627,7 @@ p, a {
 
     div.ai-menu.slide-right {
         animation-name: slideRight;
-        animation-duration: 0.33s;
+        animation-duration: 0.66s;
         animation-iteration-count: 1;
         animation-timing-function: ease-in;
     }
@@ -4644,7 +4644,7 @@ p, a {
 
     div.ai-menu.slide-left {
         animation-name: slideLeft;
-        animation-duration: 0.33s;
+        animation-duration: 0.66s;
         animation-iteration-count: 1;
         animation-timing-function: ease-out;
     }

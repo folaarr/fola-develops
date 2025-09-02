@@ -570,9 +570,19 @@ function closeNav() {
     const menu = document.querySelector("div.ai-menu");
     menu.classList.remove("slide-right");
     menu.classList.add("slide-left");
-    setTimeout(() => {
-        menu.style.left = "-66vw";
-    }, 300);
+    if (window.matchMedia("(orientation: landscape)").matches) {
+        setTimeout(() => {
+            menu.style.left = "-66vw";
+        }, 600)
+    } else if (window.matchMedia("(orientation: portrait)").matches) {
+        setTimeout(() => {
+            menu.style.left = "-66vw";
+        }, 300)
+    } else {
+        setTimeout(() => {
+            menu.style.left = "-66vw";
+        }, 300)
+    }
 }
 
 
