@@ -2275,10 +2275,7 @@ p, a {
     }
 
     div.user-message {
-        /* margin-left: 20vw; */
         padding: 2vw;
-        /* width: 72.6vw; */
-        /* margin-right: 3vw; */
         width: fit-content;
         border-radius: 2.5vw;
         border: 0.2vw solid #E7F2E4;
@@ -2800,7 +2797,7 @@ p, a {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        z-index: 1;
+        z-index: 0;
         text-decoration: none;
     }
 
@@ -4489,9 +4486,10 @@ p, a {
         width: 54vw;
         position: fixed;
         bottom: 6vw;
-        left: 33vw;
+        left: 35.175vw;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 1vw;
         z-index: 1;
     }
 
@@ -4500,7 +4498,6 @@ p, a {
         width: 37.1vw;
         height: 3.25vw;
         margin: 0;
-        margin-left: 2vw;
         /* margin-right: 6.95vw; #89918c;*/
         border-radius: 9999px;
         border: 0.15vw solid #E7F2E4;
@@ -4520,7 +4517,6 @@ p, a {
         width: 5.25vw;
         height: 5.25vw;
         margin: 0.275vw;
-        margin-right: 2.1vw;
         background: #2b3035;
     }
 
@@ -4535,11 +4531,17 @@ p, a {
         margin-bottom: 10vw;
     }
 
+    div.user-question {
+        margin-left: 30.3vw;
+        width: 36vw;
+        margin-right: 12.5vw;
+        display: flex;
+        justify-content: flex-end;
+    }
+
     div.user-message {
-        margin-left: 27.8vw;
         padding: 1vw;
-        width: 32vw;
-        margin-right: 15vw;
+        width: fit-content;
         border-radius: 1vw;
         border: 0.1vw solid #E7F2E4;
         background: rgba(43, 48, 54, 0.3);
@@ -4555,9 +4557,9 @@ p, a {
 
     div.assistant-message {
         margin: 3vw;
-        margin-left: 17vw;
+        margin-left: 19.5vw;
         width: 45vw;
-        margin-right: 15vw;
+        margin-right: 12.5vw;
     }
 
     p.assistant-message {
@@ -4612,7 +4614,7 @@ p, a {
 
     h2.ai-greeting {
         font-weight: 500;
-        font-size: 3.5vw;
+        font-size: 2.9vw;
     }
 
     @keyframes slideRight {
