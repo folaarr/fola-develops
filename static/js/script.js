@@ -705,7 +705,10 @@ function activateChatButton(accessPoint) {
                 }
             });
             document.querySelector("div.messages").innerHTML = html;
-            window.scrollTo(0, document.body.scrollHeight);
+            let elements = document.querySelectorAll('p.user-message');
+            if (elements.length > 0) {
+            elements[elements.length - 1].scrollIntoView();
+            }
             const parentElement = document.querySelector('div.ai-menu');
             const referenceChild = document.querySelector('button.old-chat');
             parentElement.insertBefore(event.target, referenceChild);
