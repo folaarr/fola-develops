@@ -983,7 +983,7 @@ def order(order_point):
 @login_required
 def ai():
     ai_chats = db.session.execute(db.select(AiChat).order_by(AiChat.datetime.desc())).scalars().all()
-    return render_template("ai.html", ai_chats=ai_chats)
+    return render_template("ai.html", ai_chats=ai_chats, page_name="a.i.")
 
 
 @app.route("/ping-ai/api", methods=["POST"])

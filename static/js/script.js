@@ -587,6 +587,32 @@ document.querySelector("form.message-form").addEventListener('submit', function(
 });
 
 
+// Scroll to last user message
+function scrollTolastUserMessage() {
+    let elements = document.querySelectorAll('p.user-message');
+    if (elements.length > 0) {
+    elements[elements.length - 1].scrollIntoView();
+    }
+}
+
+
+// Let A.I. Think
+function think() {
+    const assistantMessage = document.createElement("div");
+    assistantMessage.classList.add("assistant-message", "thinking");
+    assistantMessage.innerHTML = "<p class='text assistant-message thinking' style='color: #89918C'></p>";
+    document.querySelector("div.messages").appendChild(assistantMessage);
+    const textArray = [" ●", "●●", "●●●", "●●●●"]
+    var itemIndex = 0;
+    setInterval(function() {
+        document.querySelector("p.assistant-message.thinking").textContent = textArray[itemIndex];
+        itemIndex += 1;
+        if (itemIndex === 4) {
+            itemIndex = 0;
+        }
+    }, 250)
+}
+
 
 // Send the A.I. a message
 document.querySelector("button.send-button").addEventListener("click", function() {
@@ -602,6 +628,7 @@ document.querySelector("button.send-button").addEventListener("click", function(
         userMessage.classList.add("user-question");
         userMessage.innerHTML = "<div class='user-message'><p class='text user-message'>" + message + "</p></div>";
         document.querySelector("div.messages").appendChild(userMessage);
+        think();
         fetch("/ping-ai/api", {
             method: "POST",
             headers: {
@@ -614,6 +641,7 @@ document.querySelector("button.send-button").addEventListener("click", function(
         })
         .then(response => response.json())
         .then(function(data)  {
+            document.querySelector("div.assistant-message.thinking").remove();
             const elementsClass = "assistant-message";
             const assistantMessage = document.createElement("div");
             assistantMessage.classList.add(elementsClass);
@@ -649,6 +677,8 @@ document.querySelector("button.send-button").addEventListener("click", function(
         userMessage.classList.add("user-question");
         userMessage.innerHTML = "<div class='user-message'><p class='text user-message'>" + message + "</p></div>";
         document.querySelector("div.messages").appendChild(userMessage);
+        scrollTolastUserMessage()
+        think();
         fetch("/update-ai/api", {
             method: "POST",
             headers: {
@@ -662,6 +692,7 @@ document.querySelector("button.send-button").addEventListener("click", function(
         })
         .then(response => response.json())
         .then(function(data)  {
+            document.querySelector("div.assistant-message.thinking").remove();
             const elementsClass = "assistant-message";
             const assistantMessage = document.createElement("div");
             assistantMessage.classList.add(elementsClass);
@@ -706,10 +737,7 @@ function activateChatButton(accessPoint) {
                 }
             });
             document.querySelector("div.messages").innerHTML = html;
-            let elements = document.querySelectorAll('p.user-message');
-            if (elements.length > 0) {
-            elements[elements.length - 1].scrollIntoView();
-            }
+            scrollTolastUserMessage()
             const parentElement = document.querySelector('div.ai-menu');
             const referenceChild = document.querySelector('button.old-chat');
             parentElement.insertBefore(event.target, referenceChild);
@@ -741,4 +769,5 @@ document.querySelector("button.new-chat").addEventListener("click", function() {
     window.scrollTo(0, 0);
     closeNav();
 });
+
 
