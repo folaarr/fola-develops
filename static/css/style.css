@@ -2264,6 +2264,7 @@ p, a {
     div.messages {
         margin-top: 20vw;
         margin-bottom: 20vw;
+        color: #E7F2E4;
     }
 
     div.user-question {
@@ -4529,6 +4530,7 @@ p, a {
     div.messages {
         margin-top: 10vw;
         margin-bottom: 10vw;
+        color: #E7F2E4;
     }
 
     div.user-question {

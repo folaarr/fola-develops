@@ -17,14 +17,20 @@ headers = {
     "X-goog-api-key": gemini_key
 }
 
-system_instructions = "Answer should not be more than 325 words."
+system_instructions = "Answer should not be more than 325 words, if any of your response requires any at HTML content at any part of the response, wrap each element in the HTML content around with <xmp> opening and </xmp> closing tags."
+
+#  as your response will be rendered on an html page and we don't want your response messing with the HTML content
+
+# replace < with &lt; and > with &gt; in the html content, let there be a <br> between every parent and child in the HTML content, that means, a <br> both between their opening and closing tags and wrap all elements in your response around with the <code> opening and </code> closing tags
+
+# , if you are also explaining the function of an HTML tag in your HTML content, instead of using &lt;b&gt; turns the text bold, use <pre>&lt;b&gt;</pre> turns the text bold
 
 
 def to_html(markdown_text):
     html = markdown2.markdown(markdown_text)
     soup = BeautifulSoup(html, "html.parser")
-    for tag in soup.find_all(True):
-        tag["class"] = "text assistant-message"
+    # for tag in soup.find_all(True):
+    #     tag["class"] = "text assistant-message"
     return soup.prettify()
 
 
