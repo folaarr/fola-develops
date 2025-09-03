@@ -624,99 +624,125 @@ function think() {
 }
 
 
+function chatAi(token, chatButton, chatId) {
+    const input = document.querySelector("textarea.message-box");
+    const message = input.value;
+    input.value = "";
+    document.querySelector("div.ai-greeting").style.display = "none";
+    const userMessage = document.createElement("div");
+    userMessage.classList.add("user-question");
+    userMessage.innerHTML = "<div class='user-message'><p class='text user-message'>" + message + "</p></div>";
+    document.querySelector("div.messages").appendChild(userMessage);
+    think();
+    fetch("/ping-ai/api", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": token
+        },
+        body: JSON.stringify({
+            "message": message
+        })
+    })
+    .then(response => response.json())
+    .then(function(data)  {
+        document.querySelector("div.assistant-message.thinking").remove();
+        const elementsClass = "assistant-message";
+        const assistantMessage = document.createElement("div");
+        assistantMessage.classList.add(elementsClass);
+        assistantMessage.innerHTML = "<p class='text assistant-message id-" + data["message_id"] + "'></p>";
+        document.querySelector("div.messages").appendChild(assistantMessage);
+        var typed =  new Typed("p.assistant-message.id-" + data["message_id"], {
+        strings: [data["output"]],
+        typeSpeed: 5,
+        startDelay: 0,
+        showCursor: false
+        });
+        chatButton.setAttribute("data-chat-id", data["chat_id"]);
+        const parentElement = document.querySelector('div.ai-menu');
+        if (data["no_chats"] === true) {
+            const chatsLabel = document.createElement("div");
+            chatsLabel.classList.add("text", "chats-label"); 
+            chatsLabel.textContent = "Chats";
+            parentElement.appendChild(chatsLabel)
+        }
+        const chat = document.createElement("button");
+        chat.classList.add("old-chat");
+        chat.setAttribute('data-chat-id', data["chat_id"]);
+        chat.textContent = data["chat_title"];
+        const referenceChild = document.querySelector('button.old-chat');
+        parentElement.insertBefore(chat, referenceChild);
+        activateChatButton(chat);
+    });
+}
+
+
+function updateAi(token, chatButton, chatId) {
+    const input = document.querySelector("textarea.message-box");
+    const message = input.value;
+    input.value = "";
+    const userMessage = document.createElement("div");
+    userMessage.classList.add("user-question");
+    userMessage.innerHTML = "<div class='user-message'><p class='text user-message'>" + message + "</p></div>";
+    document.querySelector("div.messages").appendChild(userMessage);
+    scrollTolastUserMessage()
+    think();
+    fetch("/update-ai/api", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": token
+        },
+        body: JSON.stringify({
+            "chat_id": chatId,
+            "message": message
+        })
+    })
+    .then(response => response.json())
+    .then(function(data)  {
+        document.querySelector("div.assistant-message.thinking").remove();
+        const elementsClass = "assistant-message";
+        const assistantMessage = document.createElement("div");
+        assistantMessage.classList.add(elementsClass);
+        assistantMessage.innerHTML = "<p class='text assistant-message id-" + data["message_id"] + "'></p>";
+        document.querySelector("div.messages").appendChild(assistantMessage);
+        var typed =  new Typed("p.assistant-message.id-" + data["message_id"], {
+        strings: [data["output"]],
+        typeSpeed: 4,
+        startDelay: 0,
+        showCursor: false
+        });
+        chatButton.setAttribute("data-chat-id", chatId)
+    });
+}
+
+
 // Send the A.I. a message
 document.querySelector("button.send-button").addEventListener("click", function() {
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const chatButton = document.querySelector("button.send-button");
     const chatId = Number(chatButton.getAttribute('data-chat-id'));
     if (chatId === 0) {
-        const input = document.querySelector("textarea.message-box");
-        const message = input.value;
-        input.value = "";
-        document.querySelector("div.ai-greeting").style.display = "none";
-        const userMessage = document.createElement("div");
-        userMessage.classList.add("user-question");
-        userMessage.innerHTML = "<div class='user-message'><p class='text user-message'>" + message + "</p></div>";
-        document.querySelector("div.messages").appendChild(userMessage);
-        think();
-        fetch("/ping-ai/api", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": token
-            },
-            body: JSON.stringify({
-                "message": message
-            })
-        })
-        .then(response => response.json())
-        .then(function(data)  {
-            document.querySelector("div.assistant-message.thinking").remove();
-            const elementsClass = "assistant-message";
-            const assistantMessage = document.createElement("div");
-            assistantMessage.classList.add(elementsClass);
-            assistantMessage.innerHTML = "<p class='text assistant-message id-" + data["message_id"] + "'></p>";
-            document.querySelector("div.messages").appendChild(assistantMessage);
-            var typed =  new Typed("p.assistant-message.id-" + data["message_id"], {
-            strings: [data["output"]],
-            typeSpeed: 5,
-            startDelay: 0,
-            showCursor: false
-            });
-            chatButton.setAttribute("data-chat-id", data["chat_id"]);
-            const parentElement = document.querySelector('div.ai-menu');
-            if (data["no_chats"] === true) {
-                const chatsLabel = document.createElement("div");
-                chatsLabel.classList.add("text", "chats-label"); 
-                chatsLabel.textContent = "Chats";
-                parentElement.appendChild(chatsLabel)
-            }
-            const chat = document.createElement("button");
-            chat.classList.add("old-chat");
-            chat.setAttribute('data-chat-id', data["chat_id"]);
-            chat.textContent = data["chat_title"];
-            const referenceChild = document.querySelector('button.old-chat');
-            parentElement.insertBefore(chat, referenceChild);
-            activateChatButton(chat);
-        });
+        chatAi(token, chatButton, chatId)
     } else {
-        const input = document.querySelector("textarea.message-box");
-        const message = input.value;
-        input.value = "";
-        const userMessage = document.createElement("div");
-        userMessage.classList.add("user-question");
-        userMessage.innerHTML = "<div class='user-message'><p class='text user-message'>" + message + "</p></div>";
-        document.querySelector("div.messages").appendChild(userMessage);
-        scrollTolastUserMessage()
-        think();
-        fetch("/update-ai/api", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": token
-            },
-            body: JSON.stringify({
-                "chat_id": chatId,
-                "message": message
-            })
-        })
-        .then(response => response.json())
-        .then(function(data)  {
-            document.querySelector("div.assistant-message.thinking").remove();
-            const elementsClass = "assistant-message";
-            const assistantMessage = document.createElement("div");
-            assistantMessage.classList.add(elementsClass);
-            assistantMessage.innerHTML = "<p class='text assistant-message id-" + data["message_id"] + "'></p>";
-            document.querySelector("div.messages").appendChild(assistantMessage);
-            var typed =  new Typed("p.assistant-message.id-" + data["message_id"], {
-            strings: [data["output"]],
-            typeSpeed: 4,
-            startDelay: 0,
-            showCursor: false
-            });
-            chatButton.setAttribute("data-chat-id", chatId)
-        });
+        updateAi(token, chatButton, chatId)
     }
+});
+
+
+document.querySelector("textarea.message-box").addEventListener('keydown', (event) => {
+  if (event.key === "Enter" && !event.shiftKey) { 
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const chatButton = document.querySelector("button.send-button");
+    const chatId = Number(chatButton.getAttribute('data-chat-id'));
+    if (chatId === 0) {
+        event.preventDefault();
+        chatAi(token, chatButton, chatId)
+    } else {
+        event.preventDefault();
+        updateAi(token, chatButton, chatId)
+    }
+  }
 });
 
 
