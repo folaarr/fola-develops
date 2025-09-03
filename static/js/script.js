@@ -192,33 +192,33 @@ $("span.touch-designs").click(function () {
 $("div.business").click(() => {
     $("div.business-designs").toggleClass("hidden");
     if ($("div.business-designs").hasClass("hidden")) {
-        $("div.business").html('<p class="text design-type"><b>▲ 1. 🔐 Authentication System</b></p>');
+        $("div.business").html('<p class="text design-type"><b>▲ 1. 🤖 AI Assistant</b></p>');
     } else {
-        $("div.business").html('<p class="text design-type"><b>▼ 1. 🔐 Authentication System</b></p>');
+        $("div.business").html('<p class="text design-type"><b>▼ 1. 🤖 AI Assistant</b></p>');
     }
 });
 $("div.portfolio").click(() => {
     $("div.portfolio-designs").toggleClass("hidden");
     if ($("div.portfolio-designs").hasClass("hidden")) {
-        $("div.portfolio").html('<p class="text design-type"><b>▲ 2. 📤 Picture Upload Manager</b></p>');
+        $("div.portfolio").html('<p class="text design-type"><b>▲ 2. 🛒 E-commerce Platform</b></p>');
     } else {
-        $("div.portfolio").html('<p class="text design-type"><b>▼ 2. 📤 Picture Upload Manager</b></p>');
+        $("div.portfolio").html('<p class="text design-type"><b>▼ 2. 🛒 E-commerce Platform</b></p>');
     }
 });
 $("div.blog").click(() => {
     $("div.blog-designs").toggleClass("hidden");
     if ($("div.blog-designs").hasClass("hidden")) {
-        $("div.blog").html('<p class="text design-type"><b>▲ 3. 🛒 E-commerce Platform</b></p>');
+        $("div.blog").html('<p class="text design-type"><b>▲ 3. 🔐 Authentication System</b></p>');
     } else {
-        $("div.blog").html('<p class="text design-type"><b>▼ 3. 🛒 E-commerce Platform</b></p>');
+        $("div.blog").html('<p class="text design-type"><b>▼ 3. 🔐 Authentication System</b></p>');
     }
 });
 $("div.personal").click(() => {
     $("div.personal-designs").toggleClass("hidden");
     if ($("div.personal-designs").hasClass("hidden")) {
-        $("div.personal").html('<p class="text design-type"><b>▲ 4. 🤖 AI Assistant</b></p>');
+        $("div.personal").html('<p class="text design-type"><b>▲ 4. 📤 Picture Upload Manager</b></p>');
     } else {
-        $("div.personal").html('<p class="text design-type"><b>▼ 4. 🤖 AI Assistant</b></p>');
+        $("div.personal").html('<p class="text design-type"><b>▼ 4. 📤 Picture Upload Manager</b></p>');
     }
 });
 
