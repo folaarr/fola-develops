@@ -555,7 +555,7 @@ function togglePassword(buttonClass, inputClass) {
 }
 
 
-// Open the A.I. menu bar on click (portrait mode only)
+// Open the A.I. menu bar on click
 document.querySelector("button.ai-menu").addEventListener("click", function() {
     document.querySelector("button.send-button").disabled = true;
     const menu = document.querySelector("div.ai-menu");

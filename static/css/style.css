@@ -2261,6 +2261,16 @@ p, a {
         color: #E7F2E4;
     }
 
+    svg.stop-svg {
+        width: 11vw;
+        height: 11vw;
+        border-radius: 50%;
+        background: #2b3035;
+        color: #E7F2E4;
+        margin: 0.55vw;
+        margin-right: 7.5vw;
+    }
+
     div.messages {
         margin-top: 20vw;
         margin-bottom: 20vw;
@@ -4527,6 +4537,15 @@ p, a {
         color: #E7F2E4;
     }
 
+    svg.stop-svg {
+        width: 5.5vw;
+        height: 5.5vw;
+        border-radius: 50%;
+        background: #2b3035;
+        color: #E7F2E4;
+        margin: 0.275vw;
+    }
+
     div.messages {
         margin-top: 10vw;
         margin-bottom: 10vw;
@@ -4583,7 +4602,7 @@ p, a {
         height: 5.25vw;
         background: #2b3035;
         position: fixed;
-        top: 7.875vw;
+        top: 7.275vw;
         left: 21vw;
     }
 

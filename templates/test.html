@@ -16,6 +16,23 @@
      </style>
 </head>
 <body>
-
+  <button class="betana">Yeba!</button>
+  <button class="button">Click Me!</button>
+  <div class="willow"></div>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script>
+    var typed =  new Typed(".willow", {
+      strings: ["Generate a very short title (max 5 words or max 50 characters total) for this conversation, I am creating an application and using you as the API, I am setting your response as the title of this chat on the side bar, i don't want the title on the sidebar to be more than one line, don't give me title options, just give me one, I want to copy your response and render it as the title directly and it must not be more than 5 words, just respond with the title, all messages that will come from my end next will be messages from a new chat which your title will be used to tag"],
+      typeSpeed: 5,
+      startDelay: 0,
+      showCursor: false
+      });
+    document.querySelector(".button").addEventListener("click", function() {
+      typed.stop()
+    });
+    document.querySelector(".betana").addEventListener("click", function() {
+      typed.start()
+    });
+  </script>
 </body>
 </html>

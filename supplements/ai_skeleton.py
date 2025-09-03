@@ -17,7 +17,7 @@ headers = {
     "X-goog-api-key": gemini_key
 }
 
-system_instructions = "Answer should not be more than 325 words."
+system_instructions = "Respond in a humorous, but educational tone, answer should not be more than 325 words."
 
 
 def to_html(markdown_text):

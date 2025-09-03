@@ -978,7 +978,7 @@ def order(order_point):
         )
 
 
-@app.route("/ai")
+@app.route("/ai-assistant")
 @login_required
 def ai():
     ai_chats = db.session.execute(db.select(AiChat).order_by(AiChat.datetime.desc())).scalars().all()
