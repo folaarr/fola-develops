@@ -216,9 +216,9 @@ $("div.blog").click(() => {
 $("div.personal").click(() => {
     $("div.personal-designs").toggleClass("hidden");
     if ($("div.personal-designs").hasClass("hidden")) {
-        $("div.personal").html('<p class="text design-type"><b>▲ 4. 🤖 AI-Powered Writing Assistant</b></p>');
+        $("div.personal").html('<p class="text design-type"><b>▲ 4. 🤖 AI Assistant</b></p>');
     } else {
-        $("div.personal").html('<p class="text design-type"><b>▼ 4. 🤖 AI-Powered Writing Assistant</b></p>');
+        $("div.personal").html('<p class="text design-type"><b>▼ 4. 🤖 AI Assistant</b></p>');
     }
 });
 
