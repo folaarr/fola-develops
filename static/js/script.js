@@ -221,6 +221,14 @@ $("div.personal").click(() => {
         $("div.personal").html('<p class="text design-type"><b>▼ 4. 📤 Picture Upload Manager</b></p>');
     }
 });
+$("div.social").click(() => {
+    $("div.social-designs").toggleClass("hidden");
+    if ($("div.social-designs").hasClass("hidden")) {
+        $("div.social").html('<p class="text design-type"><b>▲ 5. 📝 Note-Taking App</b></p>');
+    } else {
+        $("div.social").html('<p class="text design-type"><b>▼ 5. 📝 Note-Taking App</b></p>');
+    }
+});
 
 
 // Upload section
