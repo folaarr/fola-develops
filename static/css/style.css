@@ -791,6 +791,10 @@ p, a {
         font-size: 2.8vw;
     }
 
+    p.note-content {
+        margin-bottom: 5vw;
+    }
+
     h3.date-time {
         margin-top:2vw;
         font-size: 3vw;
@@ -3102,6 +3106,10 @@ p, a {
 
     p.testimony-data {
         font-size: 1.4vw;
+    }
+
+    p.note-content {
+        margin-bottom: 2.5vw;
     }
 
     h3.date-time {
