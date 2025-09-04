@@ -11,13 +11,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 # The python datetime module
 from datetime import datetime
+from fola_develops import db
+from flask_migrate import Migrate
 
 
-class Base(DeclarativeBase):
-    pass
+# class Base(DeclarativeBase):
+#     pass
 
 
-db = SQLAlchemy(model_class=Base)
+# db = SQLAlchemy(model_class=Base)
 
 
 class UnverifiedUser(UserMixin, db.Model):

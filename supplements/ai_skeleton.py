@@ -4,7 +4,7 @@ import markdown2
 from bs4 import BeautifulSoup
 import requests
 import json
-from supplements.entities import db, AiChat
+from fola_develops.supplements.entities import db, AiChat
 
 
 load_dotenv()
