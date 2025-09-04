@@ -53,7 +53,7 @@ class LoginForm(FlaskForm):
 class NoteForm(FlaskForm):
     title = StringField(
         label="Title",
-        validators=[DataRequired(), Length(max=1000)],
+        validators=[Length(max=1000)],
         render_kw={"class": "field signup-field add-field", "placeholder": "Title"}
     )
     content = TextAreaField(
