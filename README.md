@@ -127,8 +127,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
 
 4. **Start the app** 
     ```bash
-    flask run
-
+    python main.py
 ---
 
 ## 🌐 Deployment 
