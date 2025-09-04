@@ -77,6 +77,20 @@ class NoteForm(FlaskForm):
     button = SubmitField(label="Submit", render_kw={"class": "text button add-button"})
 
 
+class TestimonyForm(FlaskForm):
+    # website = URLField(
+    #     label="URL of website built (Optional)",
+    #     # validators=[DataRequired(), URL()],
+    #     render_kw={"class": "field add-field website", "placeholder": "https://website.com"}
+    # )
+    testimony = TextAreaField(
+        label="Comment",
+        validators=[DataRequired()],
+        render_kw={"class": "field add-field", "placeholder": "Your Comment"}
+    )
+    button = SubmitField(label="Submit", render_kw={"class": "text button add-button"})
+
+
 class PictureForm(FlaskForm):
     picture = FileField(render_kw={"class": "text upload-picture"})
     button = SubmitField(label="Upload", render_kw={"class": "button upload-button"})
