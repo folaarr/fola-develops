@@ -41,7 +41,7 @@ class User(UserMixin, db.Model):
     password: Mapped[str] = mapped_column(String())
     picture_number: Mapped[int] = mapped_column(Integer(), default=0, server_default=text("0"))
     picture_url: Mapped[str] = mapped_column(String(), nullable=True)
-    notes = relationship("Testimony", back_populates="user")
+    notes = relationship("Note", back_populates="user")
     items = relationship("Item", back_populates="user")
     cart_products = relationship("CartProduct", back_populates="user")
     orders = relationship("Order", back_populates="user")

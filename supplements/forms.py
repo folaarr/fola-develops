@@ -54,12 +54,12 @@ class NoteForm(FlaskForm):
     title = StringField(
         label="Title",
         validators=[DataRequired(), Length(max=1000)],
-        render_kw={"class": "field signup-field add-field", "placeholder": "Note title"}
+        render_kw={"class": "field signup-field add-field", "placeholder": "Title"}
     )
     content = TextAreaField(
         label="Content",
         validators=[DataRequired()],
-        render_kw={"class": "field add-field", "placeholder": "Note content"}
+        render_kw={"class": "field add-field", "placeholder": "Content"}
     )
     button = SubmitField(label="Add", render_kw={"class": "text button add-button"})
 

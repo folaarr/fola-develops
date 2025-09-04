@@ -787,6 +787,10 @@ p, a {
         font-size: 3vw;
     }
 
+    p.testimony-data {
+        font-size: 2.8vw;
+    }
+
     h3.date-time {
         margin-top:2vw;
         font-size: 3vw;
@@ -920,7 +924,7 @@ p, a {
         opacity: 0.5;
     }
 
-    p.testimony-data {
+    p.note-data {
         word-break: break-word;
         font-size: 3vw;
     }
@@ -1329,7 +1333,7 @@ p, a {
 
     p.verify-flash {
         color: #81E7AF;
-        margin-top: 20vw;
+        /* margin-top: 20vw; */
         margin-bottom: 4vw;
         font-size: 2.4vw;
         text-align: center;
@@ -3036,6 +3040,7 @@ p, a {
     h2.user-greeting {
         margin-bottom: 8vh;
         text-align: center;
+        margin-top: 10vw;
     }
     
     div.add-container {
@@ -3074,6 +3079,7 @@ p, a {
     h3.testimonies-heading {
         text-align: center;
         margin-top: 6vh;
+        font-size: 1.6vw;
     }
 
     div.testimony-holder {
@@ -3088,6 +3094,14 @@ p, a {
         border-radius: 2vw;
         margin: 3.5vh 3.5vw;
         width: 50vw;
+    }
+
+    h3.testimony-heading {
+        font-size: 1.5vw;
+    }
+
+    p.testimony-data {
+        font-size: 1.4vw;
     }
 
     h3.date-time {
@@ -3141,6 +3155,7 @@ p, a {
 
     h2.add-title {
         text-align: center;
+        margin-top: 10vw;
     }
 
     input.add-button {
@@ -3219,7 +3234,7 @@ p, a {
         opacity: 0.5;
     }
 
-    p.testimony-data {
+    p.note-data {
         word-break: break-word;
     }
 
@@ -3584,7 +3599,7 @@ p, a {
 
     p.verify-flash {
         color: #81E7AF;
-        margin-top: 3vw;
+        margin-top: 10vw;
         font-size: 1.2vw;
         text-align: center;
     }

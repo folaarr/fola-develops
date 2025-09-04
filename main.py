@@ -51,7 +51,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("FLASK-SECRET-KEY")
 csrf = CSRFProtect(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE-URI")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE-URL")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
 db.init_app(app)
 
@@ -106,8 +106,7 @@ def admin_only(f):
 
 @app.route("/")
 def home():
-    posts = db.session.execute(db.select(Testimony).order_by(Testimony.id)).scalars().all()[:3]
-    return render_template("index.html", testimonies=posts, video_url=video_url)
+    return render_template("index.html", video_url=video_url)
 
 
 @app.route("/about")
@@ -142,11 +141,11 @@ def contact():
     return render_template("contact.html")
 
 
-@app.route("/testimonies")
-def testimonies():
-    # Display all the testimonies in the database on the web page, starting with the most recent
-    posts = db.session.execute(db.select(Testimony).order_by(Testimony.id.desc())).scalars().all()
-    return render_template("testimonies.html", testimonies=posts)
+# @app.route("/testimonies")
+# def testimonies():
+#     # Display all the testimonies in the database on the web page, starting with the most recent
+#     posts = db.session.execute(db.select(Testimony).order_by(Testimony.id.desc())).scalars().all()
+#     return render_template("testimonies.html", testimonies=posts)
 
 
 @app.route("/sign-up", methods=["GET", "POST"])
@@ -252,7 +251,7 @@ def settings():
 
 @app.route("/add-note", methods=["GET", "POST"])
 @login_required
-def add_testimony():
+def add_note():
     note_form = NoteForm()
     if request.method == "POST":
         if note_form.validate_on_submit():
@@ -292,15 +291,15 @@ def edit_note(i_d):
 @app.route("/confirm-delete/<int:i_d>")
 @login_required
 def confirm_delete(i_d):
-    pending_testimony = db.session.execute(db.select(Testimony).where(Testimony.id == i_d)).scalar()
-    return render_template("confirm-delete.html", testimony=pending_testimony)
+    pending_note = db.session.execute(db.select(Note).where(Note.id == i_d)).scalar()
+    return render_template("confirm-delete.html", note=pending_note)
 
 
 @app.route("/delete/<int:i_d>")
 @login_required
 def delete(i_d):
-    testimony = db.session.execute(db.select(Testimony).where(Testimony.id == i_d)).scalar()
-    db.session.delete(testimony)
+    note = db.session.execute(db.select(Note).where(Note.id == i_d)).scalar()
+    db.session.delete(note)
     db.session.commit()
     return redirect(url_for("account"))
 
@@ -547,44 +546,44 @@ def active():
     return jsonify({"status": "active"})
 
 
-@app.route("/admin")
-@login_required
-@admin_only
-def admin():
-    testimonials = db.session.execute(db.select(Testimony).order_by(Testimony.id.desc())).scalars().all()
-    return render_template("admin.html", testimonies=testimonials, admin_email=admin_email)
+# @app.route("/admin")
+# @login_required
+# @admin_only
+# def admin():
+#     testimonials = db.session.execute(db.select(Testimony).order_by(Testimony.id.desc())).scalars().all()
+#     return render_template("admin.html", testimonies=testimonials, admin_email=admin_email)
 
 
-@app.route("/show-testimony/<i_d>")
-@login_required
-@admin_only
-def show_testimony(i_d):
-    testimony = db.session.execute(db.select(Testimony).where(Testimony.id == i_d)).scalar()
-    testimony.is_visible = True
-    db.session.commit()
-    with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as connection:
-        connection.starttls()
-        connection.login(email, password)
-        connection.sendmail(
-            from_addr=email,
-            to_addrs=testimony.user.email,
-            msg=f"Subject:Your testimony has been published on the FolaDevelops testimonies section\n\n"
-                f"Dear user,\n\nYour testimony '{testimony.testimony}' for '{testimony.website}' has "
-                f"been published on the FolaDevelops testimonies section, you can view your testimony "
-                f"among others on https://webbuildhq.com/testimonies, thank you for leaving a testimony." 
-                f"\n\nBest Regards,\nFolaDevelops"
-        )
-    return redirect(url_for("admin"))
+# @app.route("/show-testimony/<i_d>")
+# @login_required
+# @admin_only
+# def show_testimony(i_d):
+#     testimony = db.session.execute(db.select(Testimony).where(Testimony.id == i_d)).scalar()
+#     testimony.is_visible = True
+#     db.session.commit()
+#     with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as connection:
+#         connection.starttls()
+#         connection.login(email, password)
+#         connection.sendmail(
+#             from_addr=email,
+#             to_addrs=testimony.user.email,
+#             msg=f"Subject:Your testimony has been published on the FolaDevelops testimonies section\n\n"
+#                 f"Dear user,\n\nYour testimony '{testimony.testimony}' for '{testimony.website}' has "
+#                 f"been published on the FolaDevelops testimonies section, you can view your testimony "
+#                 f"among others on https://webbuildhq.com/testimonies, thank you for leaving a testimony." 
+#                 f"\n\nBest Regards,\nFolaDevelops"
+#         )
+#     return redirect(url_for("admin"))
 
 
-@app.route("/hide-testimony/<i_d>")
-@login_required
-@admin_only
-def hide_testimony(i_d):
-    testimony = db.session.execute(db.select(Testimony).where(Testimony.id == i_d)).scalar()
-    testimony.is_visible = False
-    db.session.commit()
-    return redirect(url_for("admin"))
+# @app.route("/hide-testimony/<i_d>")
+# @login_required
+# @admin_only
+# def hide_testimony(i_d):
+#     testimony = db.session.execute(db.select(Testimony).where(Testimony.id == i_d)).scalar()
+#     testimony.is_visible = False
+#     db.session.commit()
+#     return redirect(url_for("admin"))
 
 
 # @app.route("/projects")

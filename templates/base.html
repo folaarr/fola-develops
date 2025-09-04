@@ -53,7 +53,6 @@
                             <a type="button" class="home text nav-link" href="{{ url_for('home') }}">Home</a>
                             <!-- <a type="button" class="about text nav-link" href="{{ url_for('about') }}">About</a> -->
                             <a type="button" class="about text nav-link" href="{{ url_for('designs') }}">Projects</a>
-        <!--                    <a type="button" class="testimonials text nav-link" href="{{ url_for('testimonies') }}">Testimonies</a>-->
         <!--                    <a type="button" class="sign-up text nav-link" href="{{ url_for('designs') }}">Designs</a>-->
                             {% if current_user.is_authenticated %}
                                 <a type="button" class="account text nav-link" href="{{ url_for('account') }}">Account</a>
@@ -61,7 +60,6 @@
                                 </a>
                                 <a class="text nav-link portrait-only" type="button" href="{{ url_for('settings') }}">Settings</a>
                                 {% if current_user.email == admin_email %}
-                                    <a class="text nav-link portrait-only" type="button" href="{{ url_for('admin') }}">Review Testimonies</a>
                                     <a class="text nav-link portrait-only" type="button" href="{{ url_for('add_item') }}">Add Item To Store</a>
                                 {% endif %}
 
