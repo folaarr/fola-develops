@@ -33,7 +33,8 @@
 {% block body %}
     <div class="designs-holder">
         <div class="designs-house">
-            <div class="design design-category business"><p class="text design-type"><b>▲ 1. 🤖 AI App</b></p>
+            <div class="design design-category business">
+                <p class="text design-type"><b>▲ 1. 🤖 AI App</b></p>
             </div>
 
             <div class="business-designs hidden">
@@ -79,7 +80,51 @@
             </div>
 
 
-            <div class="design design-category portfolio"><p class="text design-type"><b>▲ 2. 🛒 E-commerce Platform</b></p>
+            <div class="design design-category blog"><p class="text design-type"><b>▲ 2. 🔐 Authentication System</b></p>
+            </div>
+
+            <div class="blog-designs hidden">
+                <ul class=designs-list>
+                    <li class="text">
+                        <p class="text">Features:</p>
+                        <ul class="features">
+                            <li class="text">Sign up / log in / log out</li>
+                            <li class="text">"Verify Email" and "Forgot Password" via codes</li>
+                            <li class="text">User data storage to a database</li>
+                            <li class="text">Role-based access (admin vs user)</li>
+                        </ul>
+                    </li>
+
+                     <li class="text">
+                        <p class="text">Role: Full-stack Developer</p>
+                        <ul class="features">
+                        </ul>
+                    </li>
+
+                    <li class="text">
+                        <p class="text">Technology Stack:</p>
+                        <ul class="features">
+                            <li class="text">PostgreSQL</li>
+                            <li class="text">SQLAlchemy</li>
+                            <li class="text">Flask</li>
+                            <li class="text">Python</li>
+                            <li class="text">JavaScript</li>
+                            <li class="text">HTML</li>
+                            <li class="text">CSS</li>
+                        </ul>
+                    </li>
+
+                    <p class="text project-detail">Contains modern security best practices including hashed passwords, session management and CSRF protection.</p>
+
+                    <li class="text">
+                        <a class="text preview-button" href="{{url_for('sign_up')}}">Preview</a>
+                    </li>
+                
+                </ul>
+            </div>
+
+            <div class="design design-category portfolio">
+                <p class="text design-type"><b>▲ 3. 🛒 E-commerce Platform</b></p>
             </div>
             
             <div class="portfolio-designs hidden">
@@ -125,19 +170,19 @@
                 
                 </ul>
             </div>
-
-            <div class="design design-category blog"><p class="text design-type"><b>▲ 3. 🔐 Authentication System</b></p>
+            
+            
+            <div class="design design-category social">
+                <p class="text design-type"><b>▲ 4. 📝 Note-Taking App</b></p>
             </div>
 
-            <div class="blog-designs hidden">
+            <div class="social-designs hidden">
                 <ul class=designs-list>
                     <li class="text">
                         <p class="text">Features:</p>
                         <ul class="features">
-                            <li class="text">Sign up / log in / log out</li>
-                            <li class="text">"Verify Email" and "Forgot Password" via codes</li>
-                            <li class="text">User data storage to a database</li>
-                            <li class="text">Role-based access (admin vs user)</li>
+                            <li class="text">Create, edit, and delete notes</li>
+                            <li class="text">User-specific storage and history</li>
                         </ul>
                     </li>
 
@@ -154,23 +199,24 @@
                             <li class="text">SQLAlchemy</li>
                             <li class="text">Flask</li>
                             <li class="text">Python</li>
-                            <li class="text">JavaScript</li>
                             <li class="text">HTML</li>
                             <li class="text">CSS</li>
                         </ul>
                     </li>
 
-                    <p class="text project-detail">Contains modern security best practices including hashed passwords, session management and CSRF protection.</p>
+                    <p class="text project-detail">A user-focused note-taking application that allows users to manage their personal notes efficiently, it ensures users can store, retrieve, and edit their notes seamlessly, with all data linked to the author's account for privacy and long-term storage.</p>
 
+
+                    <li class="text uploader-instruction">Requires the user to be logged in</li>
                     <li class="text">
-                        <a class="text preview-button" href="{{url_for('sign_up')}}">Preview</a>
+                        <a class="text preview-button" href="{{url_for('account')}}">Preview</a>
                     </li>
-                
                 </ul>
             </div>
-            
+
+
             <div class="design design-category personal">
-                <p class="text design-type"><b>▲ 4. 📤 Picture Upload Manager</b></p>
+                <p class="text design-type"><b>▲ 5. 📤 Picture Upload Manager</b></p>
             </div>
 
             <div class="personal-designs hidden">
@@ -211,48 +257,6 @@
                     <li class="text uploader-instruction">Requires the user to be logged in</li>
                     <li class="text">
                         <a class="text preview-button" href="{{url_for('profile_picture')}}">Preview</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="design design-category social">
-                <p class="text design-type"><b>▲ 5. 📝 Note-Taking App</b></p>
-            </div>
-
-            <div class="social-designs hidden">
-                <ul class=designs-list>
-                    <li class="text">
-                        <p class="text">Features:</p>
-                        <ul class="features">
-                            <li class="text">Create, edit, and delete notes</li>
-                            <li class="text">User-specific storage and history</li>
-                        </ul>
-                    </li>
-
-                     <li class="text">
-                        <p class="text">Role: Full-stack Developer</p>
-                        <ul class="features">
-                        </ul>
-                    </li>
-
-                    <li class="text">
-                        <p class="text">Technology Stack:</p>
-                        <ul class="features">
-                            <li class="text">PostgreSQL</li>
-                            <li class="text">SQLAlchemy</li>
-                            <li class="text">Flask</li>
-                            <li class="text">Python</li>
-                            <li class="text">HTML</li>
-                            <li class="text">CSS</li>
-                        </ul>
-                    </li>
-
-                    <p class="text project-detail">A user-focused note-taking application that allows users to manage their personal notes efficiently, it ensures users can store, retrieve, and edit their notes seamlessly, with all data linked to the author's account for privacy and long-term storage.</p>
-
-
-                    <li class="text uploader-instruction">Requires the user to be logged in</li>
-                    <li class="text">
-                        <a class="text preview-button" href="{{url_for('account')}}">Preview</a>
                     </li>
                 </ul>
             </div>
