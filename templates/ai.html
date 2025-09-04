@@ -70,7 +70,7 @@
                     </svg>
                 </button>
             </div>
-            {% if ai_chats %}
+            {% if current_user.ai_chats %}
                 <div class="text chats-label">Chats</div>
             {% endif %}
             {% for chat in ai_chats %}
