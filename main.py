@@ -5,11 +5,11 @@ from flask import Flask, render_template, redirect, url_for, request, flash, jso
 # os is where the secrets are saved, like developer passwords and api keys
 import os
 # Import forms from the forms.py file
-from supplements.forms import LoginForm, SignupForm, NoteForm, PictureForm, SettingsForm, VerifyForm, EmailForm, NewPasswordForm, ItemForm
+from fola_develops_child.supplements.forms import LoginForm, SignupForm, NoteForm, PictureForm, SettingsForm, VerifyForm, EmailForm, NewPasswordForm, ItemForm
 # CSRFProtect protects from cross-site-request-forgery https://flask-wtf.readthedocs.io/en/0.15.x/csrf/
 from flask_wtf.csrf import CSRFProtect
 # Import database tables from the entities.py file
-from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Note, Item, CartProduct, Order, AiChat, AiMessage
+# from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Note, Item, CartProduct, Order, AiChat, AiMessage
 from sqlalchemy import func, desc
 # werkzeug.security hashes passwords
 # https://werkzeug.palletsprojects.com/en/stable/utils/#werkzeug.security.generate_password_hash
@@ -34,26 +34,25 @@ import random
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from supplements.email_templates import verify_one, verify_two, reset_one, reset_two, email_brand, before_greeting, before_datetime, after_datetime, before_number, before_image, before_name, before_quantity, before_price, after_price, before_total, after_total
+from fola_develops_child.supplements.email_templates import verify_one, verify_two, reset_one, reset_two, email_brand, before_greeting, before_datetime, after_datetime, before_number, before_image, before_name, before_quantity, before_price, after_price, before_total, after_total
 from functools import wraps
-from supplements.items_data import things
+from fola_develops_child.supplements.items_data import things
 # from flask_cors import CORS
-import markdown2
-from bs4 import BeautifulSoup
-import json
-from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
+from fola_develops_child.supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
+from fola_develops_child import db, create_app
 
 
 load_dotenv()
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = create_app()
 
-app.config["SECRET_KEY"] = os.environ.get("FLASK-SECRET-KEY")
 csrf = CSRFProtect(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE-URL")
+# app.config["SECRET_KEY"] = os.environ.get("FLASK-SECRET-KEY")
+# app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE-URL")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
-db.init_app(app)
+# db.init_app(app)
 
 app.config["UPLOAD_FOLDER"] = "static/images/uploads"
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "webp", "jfif"}

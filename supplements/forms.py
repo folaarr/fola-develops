@@ -69,12 +69,12 @@ class NoteForm(FlaskForm):
     #     # validators=[DataRequired(), URL()],
     #     render_kw={"class": "field add-field website", "placeholder": "https://website.com"}
     # )
-    testimony = TextAreaField(
-        label="Comment",
-        validators=[DataRequired()],
-        render_kw={"class": "field add-field", "placeholder": "Your Comment"}
-    )
-    button = SubmitField(label="Submit", render_kw={"class": "text button add-button"})
+    # testimony = TextAreaField(
+    #     label="Comment",
+    #     validators=[DataRequired()],
+    #     render_kw={"class": "field add-field", "placeholder": "Your Comment"}
+    # )
+    # button = SubmitField(label="Submit", render_kw={"class": "text button add-button"})
 
 
 class TestimonyForm(FlaskForm):
