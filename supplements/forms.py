@@ -50,7 +50,20 @@ class LoginForm(FlaskForm):
     button = SubmitField(label="Log In", render_kw={"class": "text button login-button"})
 
 
-class TestimonyForm(FlaskForm):
+class NoteForm(FlaskForm):
+    title = StringField(
+        label="Title",
+        validators=[DataRequired(), Length(max=1000)],
+        render_kw={"class": "field signup-field add-field", "placeholder": "Note title"}
+    )
+    content = TextAreaField(
+        label="Content",
+        validators=[DataRequired()],
+        render_kw={"class": "field add-field", "placeholder": "Note content"}
+    )
+    button = SubmitField(label="Add", render_kw={"class": "text button add-button"})
+
+
     # website = URLField(
     #     label="URL of website built (Optional)",
     #     # validators=[DataRequired(), URL()],
