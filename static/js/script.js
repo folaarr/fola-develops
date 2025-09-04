@@ -192,9 +192,9 @@ $("span.touch-designs").click(function () {
 $("div.business").click(() => {
     $("div.business-designs").toggleClass("hidden");
     if ($("div.business-designs").hasClass("hidden")) {
-        $("div.business").html('<p class="text design-type"><b>▲ 1. 🤖 AI Assistant</b></p>');
+        $("div.business").html('<p class="text design-type"><b>▲ 1. 🤖 AI App</b></p>');
     } else {
-        $("div.business").html('<p class="text design-type"><b>▼ 1. 🤖 AI Assistant</b></p>');
+        $("div.business").html('<p class="text design-type"><b>▼ 1. 🤖 AI App</b></p>');
     }
 });
 $("div.portfolio").click(() => {
