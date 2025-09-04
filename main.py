@@ -250,10 +250,10 @@ def settings():
     return render_template("settings.html", form=settings_form, email=user.email, admin_email=admin_email)
 
 
-@app.route("/add-testimony", methods=["GET", "POST"])
+@app.route("/add-note", methods=["GET", "POST"])
 @login_required
 def add_testimony():
-    testimony_form = TestimonyForm()
+    testimony_form = NoteForm()
     if request.method == "POST":
         if testimony_form.validate_on_submit():
             data = request.form
@@ -277,7 +277,7 @@ def add_testimony():
                 )
             flash("Thanks for adding a comment.")
             return redirect(url_for("account"))
-    return render_template("add-testimony.html", form=testimony_form, admin_email=admin_email)
+    return render_template("add-note.html", form=testimony_form, admin_email=admin_email)
 
 
 @app.route("/edit-testimony/<int:i_d>", methods=["GET", "POST"])
