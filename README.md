@@ -116,15 +116,16 @@ This project serves as a showcase of my backend and frontend engineering skills,
 4. **Set up environment variables** 
     ```bash
     export DATABASE-URI=your_postgres_or_sqlite_url
+    export FLASK-SECRET-KEY=your_flask_secret_key
     export ADMIN-EMAIL=your_primary_email_for_admin_control
     export EMAIL=your_email_for_smtp
     export PASSWORD=your_password_for_smtp
+    export GEMINI_API_KEY=your_gemini_api_key
     export CLOUDINARY_URL=your_cloudinary_cloud_storage_url
     export API-URL=your_green_api_url_for_automated_whatsapp_messages
     export ID-INSTANCE=your_green_api_id
     export API-TOKEN-INSTANCE=your_green_api_token
     export NUMBER=your_green_api_phone_number
-    export FLASK-SECRET-KEY=your_flask_secret_key
     export VIDEO-URL=your_video_url
 
 4. **Start the app** 
@@ -150,7 +151,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
 - **Portfolio (Live Projects):** [foladevelops.onrender.com](https://foladevelops.onrender.com)  
 - **GitHub:** [github.com/folajimiabolade](https://github.com/folajimiabolade)  
 - **X:** [x.com/onlyonefola](https://x.com/onlyonefola)  
-- **LinkedIn:** [linkedin.com/in/folajimi-abolade-379a01362](https://www.linkedin.com/in/folajimi-abolade-379a01362)  
+- **LinkedIn:** [linkedin.com/in/folajimi-abolade](https://www.linkedin.com/in/folajimi-abolade)  
 - **Email:** folajimiabolade@gmail.com 
 
 💡 *Feel free to reach out.*
