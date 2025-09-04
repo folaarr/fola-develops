@@ -1,6 +1,6 @@
 # Portolio Web Application (FolaDevelops)  
 
-A full-stack portfolio web application demonstrating authentication systems, e-commerce functionality, AI systems, deployment pipelines, and integrated developer projects.  
+A full-stack portfolio web application demonstrating authentication systems, e-commerce functionality, AI systems, and deployment pipelines.  
 
 This project serves as a showcase of my backend and frontend engineering skills, as well as my ability to deploy production-ready systems.  
 
