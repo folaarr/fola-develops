@@ -82,14 +82,16 @@ This project serves as a showcase of my backend and frontend engineering skills,
 ## 📂 Project Structure  
 
     fola-develops/
-    │── main.py             # Flask app entry point
-    │── entities.py         # Database entities
-    │── forms.py            # WTForms
-    │── templates/          # Jinja HTML templates
-    │── static/             # CSS, JS, images
-    │── email_templates.py  # Styled email templates
-    │── items_data.py       # E-commerce demo items
-    │── requirements.txt    # Dependencies
+    │── main.py              # Flask app entry point
+    │── supplements/         # Supporting modules
+    │ │── entities.py        # Database entities
+    │ │── forms.py           # WTForms 
+    │ │── ai_skeleton.py     # AI system settings
+    │ │── items_data.py      # E-commerce demo items
+    │ │── email_templates.py # Styled email templates
+    │── templates/           # Jinja HTML templates
+    │── static/              # CSS, JS, images
+    │── requirements.txt     # Dependencies
     └── README.md
 
 ---
