@@ -68,9 +68,6 @@ This project serves as a showcase of my backend and frontend engineering skills,
 ### 🛍️ Product Listing
 ![Product Listing](static/images/demo/store-page.png)
 <br><br>
-### ✅ Automated Order Confirmation Email
-![Order Successful](static/images/demo/email-template.png) 
-<br><br>
 ### 📝 Note-Taking App
 ![Note-Taking App](static/images/demo/note-taking-app.png) 
 <br><br>
