@@ -97,7 +97,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/folajimiabolade/fola-develops.git
+   git clone https://github.com/folaarr/fola-develops.git
    cd fola-develops
 
 2. **Create a virtual environment**  
