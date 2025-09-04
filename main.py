@@ -9,7 +9,7 @@ from supplements.forms import LoginForm, SignupForm, NoteForm, PictureForm, Sett
 # CSRFProtect protects from cross-site-request-forgery https://flask-wtf.readthedocs.io/en/0.15.x/csrf/
 from flask_wtf.csrf import CSRFProtect
 # Import database tables from the entities.py file
-from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Testimony, Item, CartProduct, Order, AiChat, AiMessage
+from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Note, Item, CartProduct, Order, AiChat, AiMessage
 from sqlalchemy import func, desc
 # werkzeug.security hashes passwords
 # https://werkzeug.palletsprojects.com/en/stable/utils/#werkzeug.security.generate_password_hash
@@ -253,58 +253,40 @@ def settings():
 @app.route("/add-note", methods=["GET", "POST"])
 @login_required
 def add_testimony():
-    testimony_form = NoteForm()
+    note_form = NoteForm()
     if request.method == "POST":
-        if testimony_form.validate_on_submit():
+        if note_form.validate_on_submit():
             data = request.form
             with app.app_context():
-                testimony = Testimony(
+                note = Note(
                     datetime=datetime.now(timezone.utc),
-                    testimony=data["testimony"],
-                    # website=data["website"],
+                    title=data["title"],
+                    content=data["content"],
                     user_id = current_user.id
                 )
-                db.session.add(testimony)
+                db.session.add(note)
                 db.session.commit()
-                requests.post(
-                    f"{url}/waInstance{i_d_}/sendMessage/{key}",
-                    json={
-                        "chatId": f"{number}@c.us",
-                        "message": f"{current_user.first_name} {current_user.last_name} added a testimony to FolaDevelops: "
-                                   f"{data['testimony']}"
-                    },
-                    headers={'Content-Type': 'application/json'}
-                )
-            flash("Thanks for adding a comment.")
+            flash("Your note has been added.")
             return redirect(url_for("account"))
-    return render_template("add-note.html", form=testimony_form, admin_email=admin_email)
+    return render_template("add-note.html", form=note_form, admin_email=admin_email)
 
 
-@app.route("/edit-testimony/<int:i_d>", methods=["GET", "POST"])
+@app.route("/edit-note/<int:i_d>", methods=["GET", "POST"])
 @login_required
-def edit_testimony(i_d):
-    testimony = db.session.execute(db.select(Testimony).where(Testimony.id == i_d)).scalar()
-    testimony_form = TestimonyForm(testimony=testimony.testimony, website=testimony.website)
+def edit_note(i_d):
+    note = db.session.execute(db.select(Note).where(Note.id == i_d)).scalar()
+    note_form = NoteForm(title=note.title, content=note.content)
     if request.method == "POST":
-        if testimony_form.validate_on_submit():
+        if note_form.validate_on_submit():
             data = request.form
             with app.app_context():
-                testimony = db.session.execute(db.select(Testimony).where(Testimony.id == i_d)).scalar()
-                testimony.testimony = data["testimony"]
-                # testimony.website = data["website"]
+                note = db.session.execute(db.select(Note).where(Note.id == i_d)).scalar()
+                note.title = data["title"]
+                note.content = data["content"]
                 db.session.commit()
-                requests.post(
-                    f"{url}/waInstance{i_d_}/sendMessage/{key}",
-                    json={
-                        "chatId": f"{number}@c.us",
-                        "message": f"{current_user.first_name} {current_user.last_name} edited a testimony in FolaDevelops: "
-                                   f"{data['testimony']}"
-                    },
-                    headers={'Content-Type': 'application/json'}
-                )
-            flash("Thanks for editing your comment.")
+            flash("Your note has been updated.")
             return redirect(url_for("account"))
-    return render_template("edit-testimony.html", i_d=i_d, form=testimony_form)
+    return render_template("edit-note.html", i_d=i_d, form=note_form)
 
 
 @app.route("/confirm-delete/<int:i_d>")

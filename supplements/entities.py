@@ -41,22 +41,21 @@ class User(UserMixin, db.Model):
     password: Mapped[str] = mapped_column(String())
     picture_number: Mapped[int] = mapped_column(Integer(), default=0, server_default=text("0"))
     picture_url: Mapped[str] = mapped_column(String(), nullable=True)
-    testimonies = relationship("Testimony", back_populates="user")
+    notes = relationship("Testimony", back_populates="user")
     items = relationship("Item", back_populates="user")
     cart_products = relationship("CartProduct", back_populates="user")
     orders = relationship("Order", back_populates="user")
     ai_chats = relationship("AiChat", back_populates="user")
 
 
-class Testimony(UserMixin, db.Model):
-    __tablename__ = "testimonies"
+class Note(UserMixin, db.Model):
+    __tablename__ = "notes"
     id: Mapped[int] = mapped_column(primary_key=True)
     datetime: Mapped[datetime] = mapped_column(DateTime())
-    website: Mapped[str] = mapped_column(String(), nullable=True)
-    testimony: Mapped[str] = mapped_column(String())
-    is_visible: Mapped[bool] = mapped_column(Boolean(), default=False, server_default=text("false"))
+    title: Mapped[str] = mapped_column(String(), nullable=True)
+    content: Mapped[str] = mapped_column(String())
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    user = relationship("User", back_populates="testimonies")
+    user = relationship("User", back_populates="notes")
 
 
 class PasswordChanger(UserMixin, db.Model):
