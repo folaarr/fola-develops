@@ -1,4 +1,4 @@
-# FolaDevelops  
+# Portolio Web Application (FolaDevelops)  
 
 A full-stack portfolio web application demonstrating authentication systems, e-commerce functionality, deployment pipelines, and integrated developer projects.  
 
