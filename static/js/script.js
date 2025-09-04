@@ -738,20 +738,26 @@ document.querySelector("button.send-button").addEventListener("click", function(
 });
 
 
-document.querySelector("textarea.message-box").addEventListener('keydown', (event) => {
-  if (event.key === "Enter" && !event.shiftKey) { 
-    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const chatButton = document.querySelector("button.send-button");
-    const chatId = Number(chatButton.getAttribute('data-chat-id'));
-    if (chatId === 0) {
-        event.preventDefault();
-        chatAi(token, chatButton, chatId)
-    } else {
-        event.preventDefault();
-        updateAi(token, chatButton, chatId)
-    }
-  }
-});
+function isDesktop() {
+  return !/Mobi|Android|iPhone|iPad|iPod|TV/.test(navigator.userAgent);
+}
+
+if (isDesktop()) {
+    document.querySelector("textarea.message-box").addEventListener('keydown', (event) => {
+        if (event.key === "Enter" && !event.shiftKey) { 
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const chatButton = document.querySelector("button.send-button");
+            const chatId = Number(chatButton.getAttribute('data-chat-id'));
+            if (chatId === 0) {
+                event.preventDefault();
+                chatAi(token, chatButton, chatId)
+            } else {
+                event.preventDefault();
+                updateAi(token, chatButton, chatId)
+            }
+        }
+    });
+}
 
 
 // Activate A.I. past-chat's button
