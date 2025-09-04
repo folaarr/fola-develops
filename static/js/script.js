@@ -654,7 +654,7 @@ function chatAi(token, chatButton, chatId) {
         document.querySelector("div.messages").appendChild(assistantMessage);
         var typed =  new Typed("p.assistant-message.id-" + data["message_id"], {
         strings: [data["output"]],
-        typeSpeed: 5,
+        typeSpeed: 1,
         startDelay: 0,
         showCursor: false
         });
@@ -708,7 +708,7 @@ function updateAi(token, chatButton, chatId) {
         document.querySelector("div.messages").appendChild(assistantMessage);
         var typed =  new Typed("p.assistant-message.id-" + data["message_id"], {
         strings: [data["output"]],
-        typeSpeed: 4,
+        typeSpeed: 1,
         startDelay: 0,
         showCursor: false
         });
