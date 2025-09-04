@@ -1,6 +1,6 @@
 # Portolio Web Application (FolaDevelops)  
 
-A full-stack portfolio web application demonstrating authentication systems, e-commerce functionality, AI systems, and deployment pipelines.  
+A full-stack portfolio web application demonstrating AI apps, authentication systems, e-commerce apps, note-taking apps, picture upload apps and deployment pipelines.  
 
 This project serves as a showcase of my backend and frontend engineering skills, as well as my ability to deploy production-ready systems.  
 
@@ -11,6 +11,11 @@ This project serves as a showcase of my backend and frontend engineering skills,
 
 ## 🚀 Features  
 
+- **AI App**  
+  - Multi-chat sessions with context awareness per topic.  
+  - User-specific chat histories with secure storage.  
+  - Extensible framework for domain-specific tasks (e.g., shopping help, customer support). 
+
 - **Authentication System**  
   - Sign-up, login, logout with secure session handling.  
   - Email verification and password reset via one-time codes.  
@@ -19,7 +24,17 @@ This project serves as a showcase of my backend and frontend engineering skills,
 - **E-Commerce Module**  
   - Product listing and order workflow.  
   - Responsive, user-friendly design.  
-  - Automated confirmation emails for successful orders.  
+  - Automated confirmation emails for successful orders. 
+
+- **Note-Taking App**  
+  - Create, edit, and delete notes with a clean interface. 
+  - User-specific storage.  
+  - Responsive design for mobile and desktop. 
+
+- **Picture Upload Appp**  
+  - Profile picture management with secure uploads. 
+  - Cloud-based image storage and retrieval.  
+  - Images optimized for fast loading. 
 
 - **Deployment & Hosting**  
   - VPS hosting with Nginx, Gunicorn, and PostgreSQL.  
@@ -45,6 +60,8 @@ This project serves as a showcase of my backend and frontend engineering skills,
 
 
 ## 🖥️ Preview
+### 🤖 AI App
+![AI App Chat](static/images/demo/ai-assistant.png) 
 ### 🔑 Login Page
 ![Login Page](static/images/demo/login-webpage.png) 
 <br><br>
@@ -53,6 +70,12 @@ This project serves as a showcase of my backend and frontend engineering skills,
 <br><br>
 ### ✅ Automated Order Confirmation Email
 ![Order Successful](static/images/demo/email-template.png) 
+<br><br>
+### 📝 Note-Taking App
+![Note-Taking App](static/images/demo/note-taking-app.png) 
+<br><br>
+### 🖼️ Picture Upload App
+![Picture Upload App](static/images/demo/uploader.png) 
 
 ---
 
@@ -128,4 +151,4 @@ This project serves as a showcase of my backend and frontend engineering skills,
 - **LinkedIn:** [linkedin.com/in/folajimi-abolade-379a01362](https://www.linkedin.com/in/folajimi-abolade-379a01362)  
 - **Email:** folajimiabolade@gmail.com 
 
-💡 *Feel free to reach out for collaborations, opportunities, or just to connect.*
+💡 *Feel free to reach out.*
