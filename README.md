@@ -31,7 +31,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
   - User-specific storage.  
   - Responsive design for mobile and desktop. 
 
-- **Picture Upload Appp**  
+- **Picture Upload App**  
   - Profile picture management with secure uploads. 
   - Cloud-based image storage and retrieval.  
   - Images optimized for fast loading. 
