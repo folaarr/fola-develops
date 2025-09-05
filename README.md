@@ -82,7 +82,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
     │── main.py              # Flask app entry point
     │── supplements/         # Supporting modules
     │ │── entities.py        # Database entities
-    │ │── forms.py           # WTForms 
+    │ │── forms.py           # CSRF protected WTForms 
     │ │── ai_skeleton.py     # AI system settings
     │ │── items_data.py      # E-commerce demo items
     │ │── email_templates.py # Styled email templates
