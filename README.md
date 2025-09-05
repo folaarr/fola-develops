@@ -118,7 +118,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
     export PASSWORD=your_password_for_automatic_sending_of_messages
     export GEMINI_API_KEY=your_gemini_api_key
     export CLOUDINARY_URL=your_cloudinary_cloud_storage_url
-    export API-URL=your_green_api_url_for_automated_whatsapp_messages
+    export API-URL=your_green_api_url_for_automatic_sending_of_whatsapp_messages
     export ID-INSTANCE=your_green_api_id
     export API-TOKEN-INSTANCE=your_green_api_token
     export NUMBER=your_green_api_phone_number
