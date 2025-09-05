@@ -88,8 +88,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
     │ │── email_templates.py # Styled email templates
     │── templates/           # Jinja HTML templates
     │── static/              # CSS, JS, images
-    │── requirements.txt     # Dependencies
-    └── README.md
+    └── requirements.txt     # Dependencies
 
 ---
 
