@@ -111,7 +111,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
 
 4. **Set up environment variables** 
     ```bash
-    export DATABASE-URI=your_postgres_or_sqlite_url
+    export DATABASE-URI=your_database_url
     export FLASK-SECRET-KEY=your_flask_secret_key
     export ADMIN-EMAIL=your_primary_email_for_admin_control
     export EMAIL=your_email_for_smtp
