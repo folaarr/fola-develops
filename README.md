@@ -115,7 +115,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
     export FLASK-SECRET-KEY=your_flask_secret_key
     export ADMIN-EMAIL=your_primary_email_for_admin_control
     export EMAIL=your_email_for_automatic_sending_of_messages
-    export PASSWORD=your_password_for_smtp
+    export PASSWORD=your_password_for_automatic_sending_of_messages
     export GEMINI_API_KEY=your_gemini_api_key
     export CLOUDINARY_URL=your_cloudinary_cloud_storage_url
     export API-URL=your_green_api_url_for_automated_whatsapp_messages
