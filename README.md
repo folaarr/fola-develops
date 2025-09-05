@@ -142,7 +142,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
 
 --- -->
 
-## 📬 Contact
+## 📬 For Inquiries, Contact
 
 - **Portfolio (Live Projects):** [foladevelops.onrender.com](https://foladevelops.onrender.com)  
 - **GitHub:** [github.com/folajimiabolade](https://github.com/folajimiabolade)  
