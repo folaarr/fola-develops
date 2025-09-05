@@ -129,7 +129,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
     ```bash
     python main.py
 ---
-
+<!-- 
 ## 🌐 Deployment 
 
 - Configured for VPS hosting with Nginx + Gunicorn.
@@ -140,7 +140,7 @@ This project serves as a showcase of my backend and frontend engineering skills,
 
 - Static assets served directly through Nginx.
 
----
+--- -->
 
 ## 📬 Contact
 
@@ -149,5 +149,3 @@ This project serves as a showcase of my backend and frontend engineering skills,
 - **X:** [x.com/onlyonefola](https://x.com/onlyonefola)  
 - **LinkedIn:** [linkedin.com/in/folajimi-abolade](https://www.linkedin.com/in/folajimi-abolade)  
 - **Email:** folajimiabolade@gmail.com 
-
-💡 *Feel free to reach out.*
