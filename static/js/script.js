@@ -229,6 +229,14 @@ $("div.personal").click(() => {
         $("div.personal").html('<p class="text design-type"><b>▼ 5. 📤 Picture Upload Manager</b></p>');
     }
 });
+$("div.businesss").click(() => {
+    $("div.businesss-designs").toggleClass("hidden");
+    if ($("div.businesss-designs").hasClass("hidden")) {
+        $("div.businesss").html('<p class="text design-type"><b>▲ 1. 🌮 QuickBite</b></p>');
+    } else {
+        $("div.businesss").html('<p class="text design-type"><b>▼ 1. 🌮 QuickBite</b></p>');
+    }
+});
 
 
 // Upload section
