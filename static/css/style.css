@@ -2472,6 +2472,16 @@ p, a {
         text-align: left;
     }
 
+    div.projects-holder {
+        display: flex;
+        gap: 2.5vw;
+    }
+
+    a.project-project {
+        width: 41.6vw;
+        text-decoration: none;
+    }
+
 }
 
 @media (orientation: landscape) {
@@ -3821,7 +3831,7 @@ p, a {
     }
 
     p.themewagon-prompt {
-        margin-bottom: 3vw;;
+        margin-bottom: 3vw;
     }
 
     svg.designs-whatsapp {
@@ -4763,6 +4773,16 @@ p, a {
         font-size: 1.6vw;
         color: #E7F2E4;
         text-align: left;
+    }
+
+    div.projects-holder {
+        display: flex;
+        gap: 1.25vw;
+    }
+
+    a.project-project {
+        width: 20.1vw;
+        text-decoration: none;
     }
 
 

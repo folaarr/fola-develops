@@ -52,8 +52,8 @@
                         <div class="links-container" style="display: none;">
                             <a type="button" class="home text nav-link" href="{{ url_for('home') }}">Home</a>
                             <!-- <a type="button" class="about text nav-link" href="{{ url_for('about') }}">About</a> -->
-                            <a type="button" class="about text nav-link" href="{{ url_for('designs') }}">Projects</a>
-        <!--                    <a type="button" class="sign-up text nav-link" href="{{ url_for('designs') }}">Designs</a>-->
+                            <a type="button" class="about text nav-link" href="{{ url_for('categories') }}">Projects</a>
+        <!--                    <a type="button" class="sign-up text nav-link" href="{{ url_for('categories') }}">Designs</a>-->
                             {% if current_user.is_authenticated %}
                                 <a type="button" class="account text nav-link" href="{{ url_for('account') }}">Account</a>
                                 <!-- <a type="button" class="settings text nav-link"href="{{ url_for('settings') }}">Settings</a> -->

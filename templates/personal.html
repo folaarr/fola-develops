@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block title %}Projects{% endblock %}
+
+{% block head %}
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        div.designs-holder::before {
+            content: "background placeholder";
+            color: transparent;
+            background-image: url("{{ url_for('static', filename='images/colors.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: fixed;
+            top: 0;
+            min-height: 100vh;
+            min-width: 100vw;
+            z-index: -1;
+            filter: brightness(0.2);
+        }
+
+        div.designs-holder {
+            min-height: 100vh;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <div class="designs-holder">
+        <div class="designs-house">
+            <div class="design design-category business">
+                <p class="text design-type"><b>▲ 1. 🤖 AI App</b></p>
+            </div>
+
+            <div class="business-designs hidden">
+                <ul class=designs-list>
+                    <li class="text">
+                        <p class="text">Features:</p>
+                        <ul class="features">
+                            <li class="text">Multi-chat sessions (users can create and revisit conversations by topic)</li>
+                            <li class="text">Contextual memory within each chat for more natural dialogue</li>
+                            <li class="text">Authentication & user-specific chat histories</li>
+                            <li class="text">Extensible design for domain-specific tasks (e.g., shopping help, study aid, personal notes)</li>
+                        </ul>
+                    </li>
+
+                     <li class="text">
+                        <p class="text">Role: Developer</p>
+                        <ul class="features">
+                        </ul>
+                    </li>
+
+                    <li class="text">
+                        <p class="text">Technology Stack:</p>
+                        <ul class="features">
+                            <li class="text">PostgreSQL</li>
+                            <li class="text">SQLAlchemy</li>
+                            <li class="text">Flask</li>
+                            <li class="text">Python</li>
+                            <li class="text">JavaScript</li>
+                            <li class="text">HTML</li>
+                            <li class="text">CSS</li>
+                        </ul>
+                    </li>
+
+                    <p class="text project-detail">A versatile AI-powered app that helps users across multiple contexts, from answering questions and retrieving information to assisting with task management, this project showcases real-time interaction, multi-session support, and a smooth user experience with animated responses.</p>
+
+
+                    <li class="text uploader-instruction">Requires the user to be logged in</li>
+                    <li class="text">
+                        <a class="text preview-button" href="{{url_for('ai_assistant')}}">Preview</a>
+                    </li>
+                
+                </ul>
+            </div>
+
+
+            <div class="design design-category blog"><p class="text design-type"><b>▲ 2. 🔐 Authentication System</b></p>
+            </div>
+
+            <div class="blog-designs hidden">
+                <ul class=designs-list>
+                    <li class="text">
+                        <p class="text">Features:</p>
+                        <ul class="features">
+                            <li class="text">Sign up / log in / log out</li>
+                            <li class="text">"Verify Email" and "Forgot Password" via codes</li>
+                            <li class="text">User data storage to a database</li>
+                            <li class="text">Role-based access (admin vs user)</li>
+                        </ul>
+                    </li>
+
+                     <li class="text">
+                        <p class="text">Role: Developer</p>
+                        <ul class="features">
+                        </ul>
+                    </li>
+
+                    <li class="text">
+                        <p class="text">Technology Stack:</p>
+                        <ul class="features">
+                            <li class="text">PostgreSQL</li>
+                            <li class="text">SQLAlchemy</li>
+                            <li class="text">Flask</li>
+                            <li class="text">Python</li>
+                            <li class="text">JavaScript</li>
+                            <li class="text">HTML</li>
+                            <li class="text">CSS</li>
+                        </ul>
+                    </li>
+
+                    <p class="text project-detail">Contains modern security best practices including hashed passwords, session management and CSRF protection.</p>
+
+                    <li class="text">
+                        <a class="text preview-button" href="{{url_for('sign_up')}}">Preview</a>
+                    </li>
+                
+                </ul>
+            </div>
+
+            <div class="design design-category portfolio">
+                <p class="text design-type"><b>▲ 3. 🛒 E-commerce Platform</b></p>
+            </div>
+            
+            <div class="portfolio-designs hidden">
+                <ul class=designs-list>
+                    
+                    <li class="text">
+                        <p class="text">Features:</p>
+                        <ul class="features">
+                            <li class="text">Product catalog</li>
+                            <li class="text">Add to cart, remove, update quantity</li>
+                            <li class="text">Order history</li>
+                            <li class="text">Checkout simulation</li>
+                            <!-- <li class="text">Admin panel: add products</li> -->
+                        </ul>
+                    </li>
+
+                     <li class="text">
+                        <p class="text">Role: Developer</p>
+                        <ul class="features">
+                        </ul>
+                    </li>
+
+                    <li class="text">
+                        <p class="text">Technology Stack:</p>
+                        <ul class="features">
+                            <li class="text">PostgreSQL</li>
+                            <li class="text">SQLAlchemy</li>
+                            <li class="text">Flask</li>
+                            <li class="text">Python</li>
+                            <li class="text">JavaScript</li>
+                            <li class="text">HTML</li>
+                            <li class="text">CSS</li>
+                        </ul>
+                    </li>
+
+                    <p class="text project-detail">Demonstrates real-world shopping features. Customers can browse a product catalog, manage their cart dynamically, and simulate checkout, with order history saved per user.</p>
+
+
+                    <li class="text uploader-instruction">Requires the user to be logged in</li>
+                    <li class="text">
+                        <a class="text preview-button" href="{{url_for('store')}}">Preview</a>
+                    </li>
+                
+                </ul>
+            </div>
+            
+            
+            <div class="design design-category social">
+                <p class="text design-type"><b>▲ 4. 📝 Note-Taking App</b></p>
+            </div>
+
+            <div class="social-designs hidden">
+                <ul class=designs-list>
+                    <li class="text">
+                        <p class="text">Features:</p>
+                        <ul class="features">
+                            <li class="text">Create, edit, and delete notes</li>
+                            <li class="text">User-specific storage and history</li>
+                        </ul>
+                    </li>
+
+                     <li class="text">
+                        <p class="text">Role: Developer</p>
+                        <ul class="features">
+                        </ul>
+                    </li>
+
+                    <li class="text">
+                        <p class="text">Technology Stack:</p>
+                        <ul class="features">
+                            <li class="text">PostgreSQL</li>
+                            <li class="text">SQLAlchemy</li>
+                            <li class="text">Flask</li>
+                            <li class="text">Python</li>
+                            <li class="text">HTML</li>
+                            <li class="text">CSS</li>
+                        </ul>
+                    </li>
+
+                    <p class="text project-detail">A user-focused note-taking application that allows users to manage their personal notes efficiently, it ensures users can store, retrieve, and edit their notes seamlessly, with all data linked to the author's account for privacy and long-term storage.</p>
+
+
+                    <li class="text uploader-instruction">Requires the user to be logged in</li>
+                    <li class="text">
+                        <a class="text preview-button" href="{{url_for('account')}}">Preview</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="design design-category personal">
+                <p class="text design-type"><b>▲ 5. 📤 Picture Upload Manager</b></p>
+            </div>
+
+            <div class="personal-designs hidden">
+                <ul class=designs-list>
+                    <li class="text">
+                        <p class="text">Features:</p>
+                        <ul class="features">
+                            <li class="text">Upload a picture via form</li>
+                            <li class="text">Store file in the cloud</li>
+                            <li class="text">Save file information from the cloud in database</li>
+                            <li class="text">Display uploaded picture as the profile picture</li>
+                            <!-- <li class="text">Validate picture type and size</li> -->
+                        </ul>
+                    </li>
+
+                     <li class="text">
+                        <p class="text">Role: Developer</p>
+                        <ul class="features">
+                        </ul>
+                    </li>
+
+                    <li class="text">
+                        <p class="text">Technology Stack:</p>
+                        <ul class="features">
+                            <li class="text">PostgreSQL</li>
+                            <li class="text">SQLAlchemy</li>
+                            <li class="text">Flask</li>
+                            <li class="text">Python</li>
+                            <li class="text">HTML</li>
+                            <li class="text">CSS</li>
+                            <li class="text">JavaScript</li>
+                        </ul>
+                    </li>
+
+                    <p class="text project-detail">Lets users upload and update their avatar in seconds. Ensures images are optimized, responsive, and securely stored, making the concept ideal for social platforms, dashboards, and membership portals.</p>
+
+
+                    <li class="text uploader-instruction">Requires the user to be logged in</li>
+                    <li class="text">
+                        <a class="text preview-button" href="{{url_for('profile_picture')}}">Preview</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="demo-prompt">
+                <strong class="text">Want to preview but don’t want to sign up?</strong>
+                <p class="text">You can log in with this demo account:</p>
+                <ul>
+                    <li class="text"><strong>Email:</strong> <code>view@foladevelops.onrender.com</code></li>
+                    <li class="text"><strong>Password:</strong> <code>View1234</code></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

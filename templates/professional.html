@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Projects{% endblock %}
+
+{% block head %}
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        div.designs-holder::before {
+            content: "background placeholder";
+            color: transparent;
+            background-image: url("{{ url_for('static', filename='images/colors.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: fixed;
+            top: 0;
+            min-height: 100vh;
+            min-width: 100vw;
+            z-index: -1;
+            filter: brightness(0.2);
+        }
+
+        div.designs-holder {
+            min-height: 100vh;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+
+
+{% endblock %}

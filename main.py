@@ -129,8 +129,18 @@ def about():
 
 
 @app.route("/projects")
-def designs():
+def categories():
     return render_template("projects.html")
+
+
+@app.route("/professional")
+def professional():
+    return render_template("professional.html")
+
+
+@app.route("/personal")
+def designs():
+    return render_template("personal.html")
 
 
 @app.route("/contact")
