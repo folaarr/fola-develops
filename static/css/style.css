@@ -2211,7 +2211,7 @@ p, a {
     }
 
     div.demo-prompt {
-        width: 86vw;
+        width: 74vw;
         border-radius: 2.5vw;
         border: 0.2vw solid #E7F2E4;
         margin-top: 12vw;
@@ -4511,7 +4511,7 @@ p, a {
     }
 
     div.demo-prompt {
-        width: 92vw;
+        width: 37vw;
         border-radius: 1.25vw;
         border: 0.1vw solid #E7F2E4;
         margin-top: 6vw;
@@ -4520,6 +4520,7 @@ p, a {
         -webkit-backdrop-filter: blur(6px);
         font-size: 1.65vw;
         padding: 2vw;
+        margin-bottom: 6vw;
     }
 
     div.ai-holder {
