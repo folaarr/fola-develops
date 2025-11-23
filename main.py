@@ -1033,5 +1033,14 @@ def update_ai():
     return jsonify({"output": ai_reply["html_output"], "message_id": statement.id})
 
 
+@app.route("/monnify-test")
+def monnify_test():
+    return render_template("monnify-test.html")
+    
+@app.route("/gallery-test")
+def gallery_test():
+    return render_template("gallery-test.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)

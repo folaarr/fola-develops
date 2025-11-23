@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        div#holder::before {
+            content: "sign-up";
+            color: transparent;
+            /* background-image: url( "{{ url_for('static', filename='images/formal-meeting.jpg') }}" ); */
+            background-color: navy;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            min-width: 100vw;
+            min-height: 100vh;
+            filter: brightness(0.2);
+       }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <div id="holder">
+
+        <div class="video-holder">
+            <video class="video" controls width="640">
+                <source src="{{ video_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+    </div>
+{% endblock %}
