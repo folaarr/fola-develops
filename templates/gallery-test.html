@@ -23,7 +23,13 @@
             min-width: 100vw;
             min-height: 100vh;
             filter: brightness(0.2);
-       }
+        }
+
+        div#holder {
+            min-width: 100vw;
+            min-height: 100vh;
+            padding-top: 12rem;
+        }
     </style>
 {% endblock %}
 
@@ -31,12 +37,12 @@
 {% block body %}
     <div id="holder">
 
-        <div class="video-holder">
+        <!-- <div class="video-holder">
             <video class="video" controls width="640">
                 <source src="{{ video_url }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-        </div>
+        </div> -->
 
     </div>
 {% endblock %}
