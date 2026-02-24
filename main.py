@@ -39,6 +39,7 @@ from functools import wraps
 from supplements.items_data import things
 # from flask_cors import CORS
 from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
+from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 
 
 load_dotenv()
@@ -77,6 +78,10 @@ login_manager.login_view = "login"
 admin_email = os.environ.get("ADMIN-EMAIL")
 
 admin_emails = [admin_email, "view@foladevelops.onrender.com"]
+
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=15)
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=14)
+jwt = JWTManager(app)
 
 # CORS(app)
 
@@ -199,7 +204,7 @@ def login():
     if request.method == "POST":
         if login_form.validate_on_submit():
             data = request.form
-            user = db.session.execute(db.select(User).where(User.email == data["email"])).scalar()
+            user = db.session.execute(db.select(User).where(User.email == data["email"].lower())).scalar()
             if user:
                 if check_password_hash(user.password, data["password"]):
                     login_user(user)
@@ -217,6 +222,30 @@ def login():
         next_page = request.args.get("next")
         login_form.next.data = next_page
     return render_template("login.html", form=login_form, next=next_page)
+
+
+@csrf.exempt
+@app.route("/api-login", methods=["POST"])
+def api_login():
+    data = request.get_json()
+    user = db.session.execute(db.select(User).where(User.email == data["email"].lower())).scalar()
+    if user:
+        if check_password_hash(user.password, data["password"]):
+            access = create_access_token(identity=str(user.id))
+            refresh = create_refresh_token(identity=str(user.id))
+            return jsonify({
+                "status": 'success', 
+                'access': access, 
+                'refresh': refresh
+            })
+        return jsonify({
+            "status": 'error',
+            "message": "Incorrect Password, Please Try Again!"
+        })
+    return jsonify({
+        "status": 'error',
+        "message": "Account Not Found."
+    })
 
 
 @app.route("/privacy-policy")
@@ -1043,4 +1072,4 @@ def gallery_test():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
