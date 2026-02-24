@@ -1,7 +1,7 @@
 # Import necessary libraries and modules
 # flask creates the server that communicates with users
 # https://flask.palletsprojects.com/en/stable/quickstart/
-from flask import Flask, render_template, redirect, url_for, request, flash, jsonify, abort
+from flask import Flask, render_template, redirect, url_for, request, flash, jsonify, abort, send_from_directory
 # os is where the secrets are saved, like developer passwords and api keys
 import os
 # Import forms from the forms.py file
@@ -246,6 +246,11 @@ def api_login():
         "status": 'error',
         "message": "Account Not Found."
     })
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    return send_from_directory("static", "sitemap.xml")
 
 
 @app.route("/privacy-policy")
