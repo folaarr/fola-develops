@@ -224,33 +224,38 @@ def login():
     return render_template("login.html", form=login_form, next=next_page)
 
 
-@csrf.exempt
-@app.route("/api-login", methods=["POST"])
-def api_login():
-    data = request.get_json()
-    user = db.session.execute(db.select(User).where(User.email == data["email"].lower())).scalar()
-    if user:
-        if check_password_hash(user.password, data["password"]):
-            access = create_access_token(identity=str(user.id))
-            refresh = create_refresh_token(identity=str(user.id))
-            return jsonify({
-                "status": 'success', 
-                'access': access, 
-                'refresh': refresh
-            })
-        return jsonify({
-            "status": 'error',
-            "message": "Incorrect Password, Please Try Again!"
-        })
-    return jsonify({
-        "status": 'error',
-        "message": "Account Not Found."
-    })
+# @csrf.exempt
+# @app.route("/api-login", methods=["POST"])
+# def api_login():
+#     data = request.get_json()
+#     user = db.session.execute(db.select(User).where(User.email == data["email"].lower())).scalar()
+#     if user:
+#         if check_password_hash(user.password, data["password"]):
+#             access = create_access_token(identity=str(user.id))
+#             refresh = create_refresh_token(identity=str(user.id))
+#             return jsonify({
+#                 "status": 'success', 
+#                 'access': access, 
+#                 'refresh': refresh
+#             })
+#         return jsonify({
+#             "status": 'error',
+#             "message": "Incorrect Password, Please Try Again!"
+#         })
+#     return jsonify({
+#         "status": 'error',
+#         "message": "Account Not Found."
+#     })
 
 
 @app.route("/sitemap.xml")
 def sitemap():
     return send_from_directory("static", "sitemap.xml")
+
+
+@app.route("/robots.txt")
+def robots():
+    return send_from_directory("static", "robots.txt")
 
 
 @app.route("/privacy-policy")
