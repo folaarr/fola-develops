@@ -258,6 +258,11 @@ def robots():
     return send_from_directory("static", "robots.txt")
 
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico')
+
+
 @app.route("/privacy-policy")
 def privacy_policy():
     return render_template("privacy-policy.html")
