@@ -224,45 +224,6 @@ def login():
     return render_template("login.html", form=login_form, next=next_page)
 
 
-@csrf.exempt
-@app.route("/api-login", methods=["POST"])
-def api_login():
-    data = request.get_json()
-    user = db.session.execute(db.select(User).where(User.email == data["email"].lower())).scalar()
-    if user:
-        if check_password_hash(user.password, data["password"]):
-            access = create_access_token(identity=str(user.id))
-            refresh = create_refresh_token(identity=str(user.id))
-            return jsonify({
-                "status": 'success', 
-                'access': access, 
-                'refresh': refresh
-            })
-        return jsonify({
-            "status": 'error',
-            "message": "Incorrect Password, Please Try Again!"
-        })
-    return jsonify({
-        "status": 'error',
-        "message": "Account Not Found."
-    })
-
-
-@app.route("/sitemap.xml")
-def sitemap():
-    return send_from_directory("static", "sitemap.xml")
-
-
-@app.route("/robots.txt")
-def robots():
-    return send_from_directory("static", "robots.txt")
-
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory('static', 'favicon.ico')
-
-
 @app.route("/privacy-policy")
 def privacy_policy():
     return render_template("privacy-policy.html")
@@ -359,12 +320,6 @@ def delete(i_d):
 @login_required
 def profile_picture():
     return render_template("profile-picture.html")
-
-
-@app.route("/api-picture")
-@login_required
-def api_picture():
-    return jsonify({})
 
 
 def valid_picture(filename):
@@ -1090,6 +1045,58 @@ def monnify_test():
 @app.route("/gallery-test")
 def gallery_test():
     return render_template("gallery-test.html")
+
+
+# Mobile app start
+
+@csrf.exempt
+@app.route("/api-login", methods=["POST"])
+def api_login():
+    data = request.get_json()
+    user = db.session.execute(db.select(User).where(User.email == data["email"].lower())).scalar()
+    if user:
+        if check_password_hash(user.password, data["password"]):
+            access = create_access_token(identity=str(user.id))
+            refresh = create_refresh_token(identity=str(user.id))
+            return jsonify({
+                "status": 'success', 
+                'access': access, 
+                'refresh': refresh
+            })
+        return jsonify({
+            "status": 'error',
+            "message": "Incorrect Password, Please Try Again!"
+        })
+    return jsonify({
+        "status": 'error',
+        "message": "Account Not Found."
+    })
+
+
+@app.route("/api-picture", methods=['GET'])
+@jwt_required()
+def api_picture():
+    jwt_id = int(get_jwt_identity())
+    user_id = db.get_or_404(User, jwt_id)
+    return jsonify({'imageURL': user_id.picture_url}) 
+
+
+
+# For crawl
+
+@app.route("/sitemap.xml")
+def sitemap():
+    return send_from_directory("static", "sitemap.xml")
+
+
+@app.route("/robots.txt")
+def robots():
+    return send_from_directory("static", "robots.txt")
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico')
 
 
 if __name__ == "__main__":
