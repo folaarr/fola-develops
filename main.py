@@ -37,7 +37,7 @@ from email.mime.text import MIMEText
 from supplements.email_templates import verify_one, verify_two, reset_one, reset_two, email_brand, before_greeting, before_datetime, after_datetime, before_number, before_image, before_name, before_quantity, before_price, after_price, before_total, after_total
 from functools import wraps
 from supplements.items_data import things
-# from flask_cors import CORS
+from flask_cors import CORS
 from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 
@@ -83,7 +83,7 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=15)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=14)
 jwt = JWTManager(app)
 
-# CORS(app)
+CORS(app)
 
 with app.app_context():
     db.create_all()
@@ -224,28 +224,28 @@ def login():
     return render_template("login.html", form=login_form, next=next_page)
 
 
-# @csrf.exempt
-# @app.route("/api-login", methods=["POST"])
-# def api_login():
-#     data = request.get_json()
-#     user = db.session.execute(db.select(User).where(User.email == data["email"].lower())).scalar()
-#     if user:
-#         if check_password_hash(user.password, data["password"]):
-#             access = create_access_token(identity=str(user.id))
-#             refresh = create_refresh_token(identity=str(user.id))
-#             return jsonify({
-#                 "status": 'success', 
-#                 'access': access, 
-#                 'refresh': refresh
-#             })
-#         return jsonify({
-#             "status": 'error',
-#             "message": "Incorrect Password, Please Try Again!"
-#         })
-#     return jsonify({
-#         "status": 'error',
-#         "message": "Account Not Found."
-#     })
+@csrf.exempt
+@app.route("/api-login", methods=["POST"])
+def api_login():
+    data = request.get_json()
+    user = db.session.execute(db.select(User).where(User.email == data["email"].lower())).scalar()
+    if user:
+        if check_password_hash(user.password, data["password"]):
+            access = create_access_token(identity=str(user.id))
+            refresh = create_refresh_token(identity=str(user.id))
+            return jsonify({
+                "status": 'success', 
+                'access': access, 
+                'refresh': refresh
+            })
+        return jsonify({
+            "status": 'error',
+            "message": "Incorrect Password, Please Try Again!"
+        })
+    return jsonify({
+        "status": 'error',
+        "message": "Account Not Found."
+    })
 
 
 @app.route("/sitemap.xml")
@@ -359,6 +359,12 @@ def delete(i_d):
 @login_required
 def profile_picture():
     return render_template("profile-picture.html")
+
+
+@app.route("/api-picture")
+@login_required
+def api_picture():
+    return jsonify({})
 
 
 def valid_picture(filename):
