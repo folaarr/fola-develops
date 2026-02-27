@@ -37,7 +37,7 @@ from email.mime.text import MIMEText
 from supplements.email_templates import verify_one, verify_two, reset_one, reset_two, email_brand, before_greeting, before_datetime, after_datetime, before_number, before_image, before_name, before_quantity, before_price, after_price, before_total, after_total
 from functools import wraps
 from supplements.items_data import things
-from flask_cors import CORS
+# from flask_cors import CORS
 from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 
@@ -83,7 +83,7 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=15)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=14)
 jwt = JWTManager(app)
 
-CORS(app)
+# CORS(app)
 
 with app.app_context():
     db.create_all()
@@ -1073,6 +1073,7 @@ def api_login():
     })
 
 
+@csrf.exempt
 @app.route("/api-picture", methods=['GET'])
 @jwt_required()
 def api_picture():
