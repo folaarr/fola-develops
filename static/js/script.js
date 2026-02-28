@@ -189,44 +189,52 @@ $("span.touch-designs").click(function () {
 
 
 //  Projects page
+$("div.application").click(() => {
+    $("div.application-designs").toggleClass("hidden");
+    if ($("div.application-designs").hasClass("hidden")) {
+        $("div.application").html('<p class="text design-type"><b>▲ 1. 📱 FolaDevelops Mobile App</b></p>');
+    } else {
+        $("div.application").html('<p class="text design-type"><b>▼ 1. 📱 FolaDevelops Mobile App</b></p>');
+    }
+});
 $("div.business").click(() => {
     $("div.business-designs").toggleClass("hidden");
     if ($("div.business-designs").hasClass("hidden")) {
-        $("div.business").html('<p class="text design-type"><b>▲ 1. 🤖 AI App</b></p>');
+        $("div.business").html('<p class="text design-type"><b>▲ 2. 🤖 AI App</b></p>');
     } else {
-        $("div.business").html('<p class="text design-type"><b>▼ 1. 🤖 AI App</b></p>');
+        $("div.business").html('<p class="text design-type"><b>▼ 2. 🤖 AI App</b></p>');
     }
 });
 $("div.blog").click(() => {
     $("div.blog-designs").toggleClass("hidden");
     if ($("div.blog-designs").hasClass("hidden")) {
-        $("div.blog").html('<p class="text design-type"><b>▲ 2. 🔐 Authentication System</b></p>');
+        $("div.blog").html('<p class="text design-type"><b>▲ 3. 🔐 Authentication System</b></p>');
     } else {
-        $("div.blog").html('<p class="text design-type"><b>▼ 2. 🔐 Authentication System</b></p>');
+        $("div.blog").html('<p class="text design-type"><b>▼ 3. 🔐 Authentication System</b></p>');
     }
 });
 $("div.portfolio").click(() => {
     $("div.portfolio-designs").toggleClass("hidden");
     if ($("div.portfolio-designs").hasClass("hidden")) {
-        $("div.portfolio").html('<p class="text design-type"><b>▲ 3. 🛒 E-commerce Platform</b></p>');
+        $("div.portfolio").html('<p class="text design-type"><b>▲ 4. 🛒 E-commerce Platform</b></p>');
     } else {
-        $("div.portfolio").html('<p class="text design-type"><b>▼ 3. 🛒 E-commerce Platform</b></p>');
+        $("div.portfolio").html('<p class="text design-type"><b>▼ 4. 🛒 E-commerce Platform</b></p>');
     }
 });
 $("div.social").click(() => {
     $("div.social-designs").toggleClass("hidden");
     if ($("div.social-designs").hasClass("hidden")) {
-        $("div.social").html('<p class="text design-type"><b>▲ 4. 📝 Note-Taking App</b></p>');
+        $("div.social").html('<p class="text design-type"><b>▲ 5. 📝 Note-Taking App</b></p>');
     } else {
-        $("div.social").html('<p class="text design-type"><b>▼ 4. 📝 Note-Taking App</b></p>');
+        $("div.social").html('<p class="text design-type"><b>▼ 5. 📝 Note-Taking App</b></p>');
     }
 });
 $("div.personal").click(() => {
     $("div.personal-designs").toggleClass("hidden");
     if ($("div.personal-designs").hasClass("hidden")) {
-        $("div.personal").html('<p class="text design-type"><b>▲ 5. 📤 Picture Upload Manager</b></p>');
+        $("div.personal").html('<p class="text design-type"><b>▲ 6. 📤 Picture Upload Manager</b></p>');
     } else {
-        $("div.personal").html('<p class="text design-type"><b>▼ 5. 📤 Picture Upload Manager</b></p>');
+        $("div.personal").html('<p class="text design-type"><b>▼ 6. 📤 Picture Upload Manager</b></p>');
     }
 });
 $("div.businesss").click(() => {
