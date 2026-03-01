@@ -192,9 +192,9 @@ $("span.touch-designs").click(function () {
 $("div.application").click(() => {
     $("div.application-designs").toggleClass("hidden");
     if ($("div.application-designs").hasClass("hidden")) {
-        $("div.application").html('<p class="text design-type"><b>▲ 1. 📱 FolaDevelops Mobile App</b></p>');
+        $("div.application").html('<p class="text design-type"><b>▲ 1. 📱 Mobile App</b></p>');
     } else {
-        $("div.application").html('<p class="text design-type"><b>▼ 1. 📱 FolaDevelops Mobile App</b></p>');
+        $("div.application").html('<p class="text design-type"><b>▼ 1. 📱 Mobile App</b></p>');
     }
 });
 $("div.business").click(() => {
