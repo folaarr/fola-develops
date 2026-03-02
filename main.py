@@ -1097,7 +1097,7 @@ def robots():
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory('static', 'favicon.ico')
+    return send_from_directory('static', 'favico.ico')
 
 
 if __name__ == "__main__":
