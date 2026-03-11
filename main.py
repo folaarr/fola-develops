@@ -198,6 +198,16 @@ def sign_up():
     return render_template("sign-up.html", form=signup_form)
 
 
+@app.route('/input-amount')
+@login_required
+def input_amount():
+    amount_form = AmountForm()
+    if amount_form.validate_on_submit():
+        data = request.form
+        amount = data['amount']
+    return render_template('input-amount.html', form=amount_form)
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     login_form = LoginForm()
@@ -1086,11 +1096,6 @@ def api_picture():
 
 # Payment gateway start
 # Paystack start
-@app.route('/input-amount')
-@login_required
-def input_amount():
-    amount_form = AmountForm()
-    return render_template('input-amount.html', form=amount_form)
 
 
 

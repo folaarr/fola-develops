@@ -125,7 +125,7 @@ class VerifyForm(FlaskForm):
 
 
 class AmountForm(FlaskForm):
-    input = IntegerField(
+    amount = IntegerField(
         label="Type amount here",
         validators=[DataRequired()],
         render_kw={"class": "field verify-input amount-input", "placeholder": "Type amount"}
