@@ -124,6 +124,15 @@ class VerifyForm(FlaskForm):
     submit = SubmitField(label="Submit", render_kw={"class": "text button signup-button signup-field verify-button"})
 
 
+class AmountForm(FlaskForm):
+    input = IntegerField(
+        label="Type amount here",
+        validators=[DataRequired()],
+        render_kw={"class": "field verify-input amount-input", "placeholder": "Type amount"}
+    )
+    submit = SubmitField(label="Pay in NGN", render_kw={"class": "text button signup-button signup-field verify-button"})
+
+
 class PasswordForm(FlaskForm):
     password = PasswordField(
         label="Your password",

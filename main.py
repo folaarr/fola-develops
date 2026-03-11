@@ -5,7 +5,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash, jso
 # os is where the secrets are saved, like developer passwords and api keys
 import os
 # Import forms from the forms.py file
-from supplements.forms import LoginForm, SignupForm, NoteForm, PictureForm, SettingsForm, VerifyForm, EmailForm, NewPasswordForm, ItemForm
+from supplements.forms import LoginForm, SignupForm, NoteForm, PictureForm, SettingsForm, VerifyForm, EmailForm, NewPasswordForm, ItemForm, AmountForm
 # CSRFProtect protects from cross-site-request-forgery https://flask-wtf.readthedocs.io/en/0.15.x/csrf/
 from flask_wtf.csrf import CSRFProtect
 # Import database tables from the entities.py file
@@ -1080,6 +1080,17 @@ def api_picture():
     jwt_id = int(get_jwt_identity())
     user_id = db.get_or_404(User, jwt_id)
     return jsonify({'imageURL': user_id.picture_url}) 
+
+
+
+
+# Payment gateway start
+# Paystack start
+@app.route('/input-amount')
+@login_required
+def input_amount():
+    amount_form = AmountForm()
+    return render_template('input-amount.html', form=amount_form)
 
 
 

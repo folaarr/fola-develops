@@ -1370,6 +1370,10 @@ p, a {
         -moz-appearance: textfield;
     }
 
+    input.amount-input {
+        text-align: center;
+    }
+
     input.verify-input::-webkit-inner-spin-button, input.verify-input::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
@@ -3655,6 +3659,10 @@ p, a {
         width: 12vw;
         /* text-align: center; */
         -moz-appearance: textfield;
+    }
+
+    input.amount-input {
+        text-align: center;
     }
 
     input.verify-input::-webkit-inner-spin-button, input.verify-input::-webkit-outer-spin-button {
