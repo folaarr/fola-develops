@@ -1157,7 +1157,7 @@ def verify_payment(reference):
 @app.route("/paystack/webhook", methods=["POST"])
 def paystack_webhook():
     print("WEBHOOK RECEIVED")
-    event = request.json
+    event = request.get_json()
     print(event)
     if event["event"] == "charge.success":
         reference = event["data"]["reference"]
