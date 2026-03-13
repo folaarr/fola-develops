@@ -1176,8 +1176,13 @@ def paystack_webhook():
         reference = event["data"]["reference"]
         payment = Payment.query.filter_by(reference=reference).first()
         if payment and payment.status != "success":
-            payment.status = "success"
-            db.session.commit()
+            url = f"https://api.paystack.co/transaction/verify/{reference}"
+            headers = {"Authorization": f"Bearer {PAYSTACK_SECRET_KEY}"}
+            response = requests.get(url, headers=headers)
+            response_json = response.json()
+            if response_json["data"]["status"] == "success":
+                payment.status = "success"
+                db.session.commit()
     return "", 200
 
 
