@@ -1147,7 +1147,8 @@ def verify_payment(reference):
     if response_json["data"]["status"] == "success":
         # payment.status = "success"
         # db.session.commit()
-        return "Payment successful"
+        print("Payment successful on redirect, don't know about on webhook")
+        return "Payment successful on redirect, don't know about on webhook"
     payment.status = "failed"
     db.session.commit()
     return "Payment failed"
@@ -1155,7 +1156,9 @@ def verify_payment(reference):
 
 @app.route("/paystack/webhook", methods=["POST"])
 def paystack_webhook():
+    print("WEBHOOK RECEIVED")
     event = request.json
+    print(event)
     if event["event"] == "charge.success":
         reference = event["data"]["reference"]
         payment = Payment.query.filter_by(reference=reference).first()
