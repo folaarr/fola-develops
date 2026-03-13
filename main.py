@@ -1171,6 +1171,7 @@ def paystack_webhook():
     ).hexdigest()
     if computed_signature != signature:
         return "Invalid signature", 400
+    print('Webhook signature is valid')
     event = request.get_json()
     if event["event"] == "charge.success":
         reference = event["data"]["reference"]
