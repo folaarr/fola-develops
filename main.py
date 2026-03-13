@@ -1103,16 +1103,28 @@ def input_amount():
     return render_template('input-amount.html', form=amount_form)
 
 
+def expire_old_payments():
+    one_hour_ago = datetime.now(timezone.utc) - timedelta(hours=1)
+    old_payments = Payment.query.filter(
+        Payment.status == "pending",
+        Payment.created_at < one_hour_ago
+    ).all()
+    for payment in old_payments:
+        payment.status = "expired"
+    db.session.commit()
+
+
 @app.route('/pay/<int:amount>', methods=["GET", "POST"])
 @login_required
 def pay(amount):
+    expire_old_payments()
     reference = str(uuid.uuid4())
     payment = Payment(
         email=current_user.email,
         amount=amount,
         reference=reference,
         currency="NGN",
-        created_at=datetime.now()
+        created_at=datetime.now(timezone.utc)
     )
     db.session.add(payment)
     db.session.commit()
@@ -1148,10 +1160,13 @@ def verify_payment(reference):
     payment = Payment.query.filter_by(reference=reference).first()
     if not payment:
         return "Payment record not found", 404
+    if payment.status == "expired":
+        return "Payment expired"
     if payment.status == "success":
         return "Payment already marked as success (probably from webhook)", 200
     if response_json["data"]["status"] == "success":
         payment.status = "success"
+        payment.paid_at = datetime.now(timezone.utc)
         db.session.commit()
         return "Payment successful"
     payment.status = "failed"
@@ -1175,6 +1190,10 @@ def paystack_webhook():
     if event["event"] == "charge.success":
         reference = event["data"]["reference"]
         payment = Payment.query.filter_by(reference=reference).first()
+        if not payment:
+            return "", 200
+        if payment and payment.status == "expired":
+            return "Payment expired"
         if payment and payment.status != "success":
             url = f"https://api.paystack.co/transaction/verify/{reference}"
             headers = {"Authorization": f"Bearer {PAYSTACK_SECRET_KEY}"}
@@ -1182,6 +1201,7 @@ def paystack_webhook():
             response_json = response.json()
             if response_json["data"]["status"] == "success":
                 payment.status = "success"
+                payment.paid_at = datetime.now(timezone.utc)
                 db.session.commit()
     return "", 200
 
