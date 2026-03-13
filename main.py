@@ -9,7 +9,7 @@ from supplements.forms import LoginForm, SignupForm, NoteForm, PictureForm, Sett
 # CSRFProtect protects from cross-site-request-forgery https://flask-wtf.readthedocs.io/en/0.15.x/csrf/
 from flask_wtf.csrf import CSRFProtect
 # Import database tables from the entities.py file
-from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Note, Item, CartProduct, Order, AiChat, AiMessage
+from supplements.entities import db, UnverifiedUser, User, PasswordChanger, Note, Item, CartProduct, Order, AiChat, AiMessage, Payment
 from sqlalchemy import func, desc
 # werkzeug.security hashes passwords
 # https://werkzeug.palletsprojects.com/en/stable/utils/#werkzeug.security.generate_password_hash
@@ -40,6 +40,7 @@ from supplements.items_data import things
 # from flask_cors import CORS
 from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity
+import uuid
 
 
 load_dotenv()
@@ -83,9 +84,13 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=15)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=14)
 jwt = JWTManager(app)
 
+PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY")
+PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY")
+
 # CORS(app)
 
 with app.app_context():
+    db.drop_all()
     db.create_all()
 
 
@@ -196,16 +201,6 @@ def sign_up():
                 flash("Passwords do not match, please try again.")
                 return redirect(url_for("sign_up"))
     return render_template("sign-up.html", form=signup_form)
-
-
-@app.route('/input-amount')
-@login_required
-def input_amount():
-    amount_form = AmountForm()
-    if amount_form.validate_on_submit():
-        data = request.form
-        amount = data['amount']
-    return render_template('input-amount.html', form=amount_form)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -1096,7 +1091,22 @@ def api_picture():
 
 # Payment gateway start
 # Paystack start
+@app.route('/input-amount', methods=["GET", "POST"])
+@login_required
+def input_amount():
+    amount_form = AmountForm()
+    if amount_form.validate_on_submit():
+        data = request.form
+        amount = data['amount']
+        return redirect(url_for('pay', amount=amount))
+    return render_template('input-amount.html', form=amount_form)
 
+
+@app.route('/pay/<int:amount>', methods=["GET", "POST"])
+@login_required
+def pay(amount):
+    print(amount)
+    return "wicked"
 
 
 # For crawl

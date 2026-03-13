@@ -118,3 +118,15 @@ class AiMessage(UserMixin, db.Model):
     message_html: Mapped[str] = mapped_column(String(), nullable=True)
     chat_id: Mapped[int | None] = mapped_column(ForeignKey("ai_chats.id"), nullable=True)
     chat = relationship("AiChat", back_populates="messages")
+
+
+class Payment(UserMixin, db.Model):
+    __tablename__ = "payments"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(String(120))
+    amount: Mapped[int] = mapped_column(Integer())
+    reference: Mapped[str] = mapped_column(String(120), unique=True)
+    status: Mapped[str] = mapped_column(String(50), default="pending")
+    currency: Mapped[str] = mapped_column(String(10), default="NGN")
+    created_at: Mapped[datetime] = mapped_column(DateTime())
+    paid_at: Mapped[datetime] = mapped_column(DateTime(), nullable=True)

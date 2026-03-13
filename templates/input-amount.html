@@ -30,10 +30,10 @@
     </div>
     <div class="verify-card">
         <div class="verify-form">
-            <form class="verify-house" action="{{ url_for('verify_email', e_mail=e_mail) }}" method="post" novalidate>
+            <form class="verify-house" action="{{ url_for('input_amount') }}" method="post" novalidate>
                 {{ form.csrf_token }}
-                {{ form.input() }}<br>
-                {% for error in form.input.errors %}
+                {{ form.amount() }}<br>
+                {% for error in form.amount.errors %}
                 <p class="text add-instruction">{{ error }}</p>
                 {% endfor %}
                 <!--  Flashed Messages  -->
