@@ -41,6 +41,8 @@ from supplements.items_data import things
 from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 import uuid
+import hashlib
+import hmac
 
 
 load_dotenv()
@@ -1160,6 +1162,15 @@ def verify_payment(reference):
 @app.route("/paystack/webhook", methods=["POST"])
 @csrf.exempt
 def paystack_webhook():
+    signature = request.headers.get("x-paystack-signature")
+    payload = request.data
+    computed_signature = hmac.new(
+        PAYSTACK_SECRET_KEY.encode(),
+        payload,
+        hashlib.sha512
+    ).hexdigest()
+    if computed_signature != signature:
+        return "Invalid signature", 400
     event = request.get_json()
     if event["event"] == "charge.success":
         reference = event["data"]["reference"]
