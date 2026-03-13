@@ -1155,6 +1155,7 @@ def verify_payment(reference):
 
 
 @app.route("/paystack/webhook", methods=["POST"])
+@csrf.exempt
 def paystack_webhook():
     print("WEBHOOK RECEIVED")
     event = request.get_json()
