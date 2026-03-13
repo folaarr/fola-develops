@@ -1144,11 +1144,14 @@ def verify_payment(reference):
     response = requests.get(url, headers=headers)
     response_json = response.json()
     payment = Payment.query.filter_by(reference=reference).first()
+    if not payment:
+        return "Payment record not found", 404
+    if payment.status == "success":
+        return "Payment already marked as success (probably from webhook)", 200
     if response_json["data"]["status"] == "success":
-        # payment.status = "success"
-        # db.session.commit()
-        print("Payment successful on redirect, don't know about on webhook")
-        return "Payment successful on redirect, don't know about on webhook"
+        payment.status = "success"
+        db.session.commit()
+        return "Payment successful"
     payment.status = "failed"
     db.session.commit()
     return "Payment failed"
@@ -1157,9 +1160,7 @@ def verify_payment(reference):
 @app.route("/paystack/webhook", methods=["POST"])
 @csrf.exempt
 def paystack_webhook():
-    print("WEBHOOK RECEIVED")
     event = request.get_json()
-    print(event)
     if event["event"] == "charge.success":
         reference = event["data"]["reference"]
         payment = Payment.query.filter_by(reference=reference).first()
