@@ -1181,7 +1181,6 @@ def paystack_webhook():
             response = requests.get(url, headers=headers)
             response_json = response.json()
             if response_json["data"]["status"] == "success":
-                print('verification successful from webhook reference')
                 payment.status = "success"
                 db.session.commit()
     return "", 200
