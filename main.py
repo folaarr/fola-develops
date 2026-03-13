@@ -1104,8 +1104,65 @@ def input_amount():
 @app.route('/pay/<int:amount>', methods=["GET", "POST"])
 @login_required
 def pay(amount):
-    print(amount)
-    return "wicked"
+    reference = str(uuid.uuid4())
+    payment = Payment(
+        email=current_user.email,
+        amount=amount,
+        reference=reference,
+        currency="NGN",
+        created_at=datetime.now()
+    )
+    db.session.add(payment)
+    db.session.commit()
+    url = "https://api.paystack.co/transaction/initialize"
+    headers = {
+        "Authorization": f"Bearer {PAYSTACK_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "email": current_user.email,
+        "amount": amount * 100,
+        "reference": reference,
+        "currency": "NGN",
+        "callback_url": url_for("payment_callback", _external=True)
+    }
+    response = requests.post(url, json=data, headers=headers)
+    response_json = response.json()
+    return redirect(response_json["data"]["authorization_url"])
+
+
+@app.route("/payment/callback")
+def payment_callback():
+    reference = request.args.get("reference")
+    return redirect(url_for("verify_payment", reference=reference))
+
+
+@app.route("/verify/<reference>")
+def verify_payment(reference):
+    url = f"https://api.paystack.co/transaction/verify/{reference}"
+    headers = {"Authorization": f"Bearer {PAYSTACK_SECRET_KEY}"}
+    response = requests.get(url, headers=headers)
+    response_json = response.json()
+    payment = Payment.query.filter_by(reference=reference).first()
+    if response_json["data"]["status"] == "success":
+        # payment.status = "success"
+        # db.session.commit()
+        return "Payment successful"
+    payment.status = "failed"
+    db.session.commit()
+    return "Payment failed"
+
+
+@app.route("/paystack/webhook", methods=["POST"])
+def paystack_webhook():
+    event = request.json
+    if event["event"] == "charge.success":
+        reference = event["data"]["reference"]
+        payment = Payment.query.filter_by(reference=reference).first()
+        if payment and payment.status != "success":
+            payment.status = "success"
+            db.session.commit()
+    return "", 200
 
 
 # For crawl
