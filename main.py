@@ -90,7 +90,6 @@ PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY")
 # CORS(app)
 
 with app.app_context():
-    db.drop_all()
     db.create_all()
 
 
