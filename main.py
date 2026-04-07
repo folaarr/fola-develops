@@ -86,8 +86,8 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=15)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=14)
 jwt = JWTManager(app)
 
-PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY")
-PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY")
+PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_LIVE_SECRET_KEY")
+PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_LIVE_PUBLIC_KEY")
 
 # CORS(app)
 
@@ -1177,6 +1177,7 @@ def verify_payment(reference):
 @app.route("/paystack/webhook", methods=["POST"])
 @csrf.exempt
 def paystack_webhook():
+    print('WEBHOOK FIRED!')
     signature = request.headers.get("x-paystack-signature")
     payload = request.data
     computed_signature = hmac.new(
