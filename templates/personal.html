@@ -33,8 +33,54 @@
 {% block body %}
     <div class="designs-holder">
         <div class="designs-house">
+            <div class="design design-category payment">
+                <p class="text design-type"><b>▲ 1. 💳 Payment System (Paystack Integration)</b></p>
+            </div>
+
+            <div class="payment-designs hidden">
+                <ul class=designs-list>
+                    <li class="text">
+                        <p class="text">Features:</p>
+                        <ul class="features">
+                            <li class="text">Secure payment processing with Paystack</li>
+                            <li class="text">Unique transaction reference tracking</li>
+                            <li class="text">Webhook handling with signature verification</li>
+                            <li class="text">Server-side payment verification (anti-fraud)</li>
+                            <li class="text">Payment status handling (success, failed, expired)</li>
+                            <li class="text">Idempotent updates to prevent duplicate processing</li>
+                        </ul>
+                    </li>
+
+                     <li class="text">
+                        <p class="text">Role: Developer</p>
+                        <ul class="features">
+                        </ul>
+                    </li>
+
+                    <li class="text">
+                        <p class="text">Technology Stack:</p>
+                        <ul class="features">
+                            <li class="text">Flask</li>
+                            <li class="text">PostgreSQL</li>
+                            <li class="text">SQLAlchemy</li>
+                            <li class="text">Paystack API</li>
+                            <li class="text">Python</li>
+                        </ul>
+                    </li>
+
+                    <p class="text project-detail">A production-ready payment system that enables real transactions within the platform. Designed with reliability and security in mind, it combines webhook events and server-side verification to ensure accurate payment status handling while preventing fraud and duplicate processing. This system reflects real-world backend architecture used in fintech and e-commerce platforms.</p>
+                    
+                    <li class="text uploader-instruction">Requires the user to be logged in</li>
+                    <li class="text">
+                        <a class="text preview-button" href="{{url_for('input_amount')}}">Preview</a>
+                    </li>
+                
+                </ul>
+            </div>
+
+
             <div class="design design-category application">
-                <p class="text design-type"><b>▲ 1. 📱 Mobile App</b></p>
+                <p class="text design-type"><b>▲ 2. 📱 Mobile App</b></p>
             </div>
 
             <div class="application-designs hidden">
@@ -84,7 +130,7 @@
 
 
             <div class="design design-category business">
-                <p class="text design-type"><b>▲ 2. 🤖 AI App</b></p>
+                <p class="text design-type"><b>▲ 3. 🤖 AI App</b></p>
             </div>
 
             <div class="business-designs hidden">
@@ -130,7 +176,7 @@
             </div>
 
 
-            <div class="design design-category blog"><p class="text design-type"><b>▲ 3. 🔐 Authentication System</b></p>
+            <div class="design design-category blog"><p class="text design-type"><b>▲ 4. 🔐 Authentication System</b></p>
             </div>
 
             <div class="blog-designs hidden">
@@ -174,7 +220,7 @@
             </div>
 
             <div class="design design-category portfolio">
-                <p class="text design-type"><b>▲ 4. 🛒 E-commerce Platform</b></p>
+                <p class="text design-type"><b>▲ 5. 🛒 E-commerce Platform</b></p>
             </div>
             
             <div class="portfolio-designs hidden">
@@ -223,7 +269,7 @@
             
             
             <div class="design design-category social">
-                <p class="text design-type"><b>▲ 5. 📝 Note-Taking App</b></p>
+                <p class="text design-type"><b>▲ 6. 📝 Note-Taking App</b></p>
             </div>
 
             <div class="social-designs hidden">
@@ -266,7 +312,7 @@
 
 
             <div class="design design-category personal">
-                <p class="text design-type"><b>▲ 6. 📤 Picture Upload Manager</b></p>
+                <p class="text design-type"><b>▲ 7. 📤 Picture Upload Manager</b></p>
             </div>
 
             <div class="personal-designs hidden">
