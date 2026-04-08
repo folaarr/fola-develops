@@ -1,6 +1,6 @@
 # Portolio Web Application (FolaDevelops)  
 
-A full-stack portfolio web application demonstrating AI apps, authentication systems, e-commerce apps, note-taking apps, picture upload apps and deployment pipelines.  
+A full-stack portfolio web application demonstrating payment systems, AI apps, authentication systems, e-commerce apps, note-taking apps, picture upload apps and deployment pipelines.  
 
 This project serves as a showcase of my backend and frontend engineering skills, as well as my ability to deploy production-ready systems.  
 
@@ -10,6 +10,11 @@ This project serves as a showcase of my backend and frontend engineering skills,
 ---
 
 ## 🚀 Features  
+
+- **Payment System (Paystack Integration)**  
+  - Secure payment processing via Paystack API.  
+  - Webhook verification for transaction confirmations.  
+  - User-specific payment records and status tracking. 
 
 - **AI App**  
   - Multi-chat sessions with context awareness per topic.  
