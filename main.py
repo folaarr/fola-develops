@@ -1137,7 +1137,7 @@ def pay(amount):
         "email": current_user.email,
         "amount": amount * 100,
         "reference": reference,
-        "currency": "NGN",
+        "currency": "USD",
         "callback_url": url_for("payment_callback", _external=True)
     }
     response = requests.post(url, json=data, headers=headers)
