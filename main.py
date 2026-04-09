@@ -1144,7 +1144,7 @@ def pay(amount):
     response_json = response.json()
     print(response_json)
     # return redirect(response_json["data"]["authorization_url"])
-    return
+    return "Function passed"
 
 
 @app.route("/payment/callback")
