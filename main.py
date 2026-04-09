@@ -1123,7 +1123,7 @@ def pay(amount):
         email=current_user.email,
         amount=amount,
         reference=reference,
-        currency="NGN",
+        currency="USD",
         created_at=datetime.now(timezone.utc)
     )
     db.session.add(payment)
@@ -1142,7 +1142,9 @@ def pay(amount):
     }
     response = requests.post(url, json=data, headers=headers)
     response_json = response.json()
-    return redirect(response_json["data"]["authorization_url"])
+    print(response_json)
+    # return redirect(response_json["data"]["authorization_url"])
+    return
 
 
 @app.route("/payment/callback")
