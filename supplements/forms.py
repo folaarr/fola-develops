@@ -2,7 +2,7 @@
 # flask-wtforms are used to render forms with cross-site-request-forgery protection on the front-end(web page)
 # https://flask-wtf.readthedocs.io/en/0.15.x/quickstart/
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, URLField, TextAreaField, HiddenField, FileField, IntegerField
+from wtforms import SelectField, StringField, EmailField, PasswordField, SubmitField, BooleanField, URLField, TextAreaField, HiddenField, FileField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, InputRequired, URL
 
 
@@ -130,7 +130,15 @@ class AmountForm(FlaskForm):
         validators=[DataRequired()],
         render_kw={"class": "field verify-input amount-input", "placeholder": "Type amount"}
     )
-    submit = SubmitField(label="Pay in NGN", render_kw={"class": "text button signup-button signup-field verify-button"})
+    gateway = SelectField(
+        "Payment Method",
+        choices=[
+            ("paystack", "NGN (Paystack)"),
+            ("flutterwave", "USD (Flutterwave)")
+        ],
+        render_kw={"class": "field"}
+    )
+    submit = SubmitField(label="Pay Folajimi Abolade", render_kw={"class": "text button signup-button signup-field verify-button"})
 
 
 class PasswordForm(FlaskForm):

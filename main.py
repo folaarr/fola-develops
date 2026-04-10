@@ -92,6 +92,7 @@ PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_LIVE_PUBLIC_KEY")
 # CORS(app)
 
 with app.app_context():
+    db.drop_all()
     db.create_all()
 
 
@@ -1090,7 +1091,7 @@ def api_picture():
 
 
 
-# Payment gateway start
+# Payment gateways start
 # Paystack start
 @app.route('/input-amount', methods=["GET", "POST"])
 @login_required
@@ -1123,6 +1124,7 @@ def pay(amount):
         email=current_user.email,
         amount=amount,
         reference=reference,
+        gateway="paystack",
         currency="NGN",
         created_at=datetime.now(timezone.utc)
     )
@@ -1142,6 +1144,10 @@ def pay(amount):
     }
     response = requests.post(url, json=data, headers=headers)
     response_json = response.json()
+
+    if not response_json.get("status"):
+        return f"Error: {response_json.get('message')}", 400
+    
     return redirect(response_json["data"]["authorization_url"])
 
 
@@ -1205,6 +1211,39 @@ def paystack_webhook():
                 payment.paid_at = datetime.now(timezone.utc)
                 db.session.commit()
     return "", 200
+
+
+# Flutterwave start
+# @app.route('/f-pay/<int:amount>', methods=["GET", "POST"])
+# @login_required
+# def f_pay(amount):
+#     expire_old_payments()
+#     reference = str(uuid.uuid4())
+#     payment = Payment(
+#         email=current_user.email,
+#         amount=amount,
+#         reference=reference,
+#         gateway="flutterwave",
+#         currency="NGN",
+#         created_at=datetime.now(timezone.utc)
+#     )
+#     db.session.add(payment)
+#     db.session.commit()
+#     url = "https://api.paystack.co/transaction/initialize"
+#     headers = {
+#         "Authorization": f"Bearer {PAYSTACK_SECRET_KEY}",
+#         "Content-Type": "application/json"
+#     }
+#     data = {
+#         "email": current_user.email,
+#         "amount": amount * 100,
+#         "reference": reference,
+#         "currency": "NGN",
+#         "callback_url": url_for("payment_callback", _external=True)
+#     }
+#     response = requests.post(url, json=data, headers=headers)
+#     response_json = response.json()
+#     return redirect(response_json["data"]["authorization_url"])
 
 
 # For crawl

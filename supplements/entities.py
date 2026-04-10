@@ -126,6 +126,7 @@ class Payment(UserMixin, db.Model):
     email: Mapped[str] = mapped_column(String(120))
     amount: Mapped[int] = mapped_column(Integer())
     reference: Mapped[str] = mapped_column(String(120), unique=True)
+    gateway: Mapped[str] = mapped_column(String(50))
     status: Mapped[str] = mapped_column(String(50), default="pending")
     currency: Mapped[str] = mapped_column(String(10), default="NGN")
     created_at: Mapped[datetime] = mapped_column(DateTime())
