@@ -97,7 +97,6 @@ FLUTTERWAVE_SECRET_HASH = os.environ.get("FLASK-SECRET-KEY")
 # CORS(app)
 
 with app.app_context():
-    db.drop_all()
     db.create_all()
 
 
