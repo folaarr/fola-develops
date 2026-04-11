@@ -133,12 +133,12 @@ class AmountForm(FlaskForm):
     gateway = SelectField(
         "Payment Method",
         choices=[
-            ("paystack", "NGN (Paystack)"),
-            ("flutterwave", "USD (Flutterwave)")
+            ("flutterwave", "USD (Flutterwave)"),
+            ("paystack", "NGN (Paystack)")
         ],
         render_kw={"class": "field"}
     )
-    submit = SubmitField(label="Pay Folajimi Abolade", render_kw={"class": "text button signup-button signup-field verify-button"})
+    submit = SubmitField(label="Send to Folajimi Abolade", render_kw={"class": "text button signup-button signup-field verify-button"})
 
 
 class PasswordForm(FlaskForm):
