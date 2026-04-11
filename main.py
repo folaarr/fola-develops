@@ -1103,7 +1103,7 @@ def input_amount():
     if amount_form.validate_on_submit():
         data = request.form
         amount = data['amount']
-        gateway = data['amount']
+        gateway = data['gateway']
         if gateway == "paystack":
             return redirect(url_for('pay', amount=amount))
         elif gateway == "flutterwave":
