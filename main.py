@@ -1232,7 +1232,7 @@ def f_pay(amount):
         amount=amount,
         reference=reference,
         gateway="flutterwave",
-        currency="USD",
+        currency="NGN",
         created_at=datetime.now(timezone.utc)
     )
     db.session.add(payment)
@@ -1245,7 +1245,7 @@ def f_pay(amount):
     data = {
         "tx_ref": reference,
         "amount": amount,
-        "currency": "USD",
+        "currency": "NGN",
         "redirect_url": url_for("f_payment_callback", _external=True),
         "customer": {
             "email": current_user.email
