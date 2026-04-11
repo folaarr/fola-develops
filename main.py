@@ -89,6 +89,11 @@ jwt = JWTManager(app)
 PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_LIVE_SECRET_KEY")
 PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_LIVE_PUBLIC_KEY")
 
+FLUTTERWAVE_SECRET_KEY = os.environ.get("FLUTTERWAVE_TEST_SECRET_KEY")
+FLUTTERWAVE_PUBLIC_KEY = os.environ.get("FLUTTERWAVE_TEST_PUBLIC_KEY")
+# FLUTTERWAVE_ENCRYPTION_KEY = os.environ.get("FLUTTERWAVE_LIVE_ENCRYPTION_KEY")
+FLUTTERWAVE_SECRET_HASH = os.environ.get("FLASK-SECRET-KEY")
+
 # CORS(app)
 
 with app.app_context():
@@ -1092,7 +1097,6 @@ def api_picture():
 
 
 # Payment gateways start
-# Paystack start
 @app.route('/input-amount', methods=["GET", "POST"])
 @login_required
 def input_amount():
@@ -1100,7 +1104,11 @@ def input_amount():
     if amount_form.validate_on_submit():
         data = request.form
         amount = data['amount']
-        return redirect(url_for('pay', amount=amount))
+        gateway = data['amount']
+        if gateway == "paystack":
+            return redirect(url_for('pay', amount=amount))
+        elif gateway == "flutterwave":
+            return redirect(url_for('f_pay', amount=amount))
     return render_template('input-amount.html', form=amount_form)
 
 
@@ -1115,6 +1123,7 @@ def expire_old_payments():
     db.session.commit()
 
 
+# Paystack start
 @app.route('/pay/<int:amount>', methods=["GET", "POST"])
 @login_required
 def pay(amount):
@@ -1183,7 +1192,7 @@ def verify_payment(reference):
 @app.route("/paystack/webhook", methods=["POST"])
 @csrf.exempt
 def paystack_webhook():
-    print('WEBHOOK FIRED!')
+    print('WEBHOOK FIRED BY PAYSTACK!')
     signature = request.headers.get("x-paystack-signature")
     payload = request.data
     computed_signature = hmac.new(
@@ -1214,36 +1223,122 @@ def paystack_webhook():
 
 
 # Flutterwave start
-# @app.route('/f-pay/<int:amount>', methods=["GET", "POST"])
-# @login_required
-# def f_pay(amount):
-#     expire_old_payments()
-#     reference = str(uuid.uuid4())
-#     payment = Payment(
-#         email=current_user.email,
-#         amount=amount,
-#         reference=reference,
-#         gateway="flutterwave",
-#         currency="NGN",
-#         created_at=datetime.now(timezone.utc)
-#     )
-#     db.session.add(payment)
-#     db.session.commit()
-#     url = "https://api.paystack.co/transaction/initialize"
-#     headers = {
-#         "Authorization": f"Bearer {PAYSTACK_SECRET_KEY}",
-#         "Content-Type": "application/json"
-#     }
-#     data = {
-#         "email": current_user.email,
-#         "amount": amount * 100,
-#         "reference": reference,
-#         "currency": "NGN",
-#         "callback_url": url_for("payment_callback", _external=True)
-#     }
-#     response = requests.post(url, json=data, headers=headers)
-#     response_json = response.json()
-#     return redirect(response_json["data"]["authorization_url"])
+@app.route('/f-pay/<int:amount>', methods=["GET", "POST"])
+@login_required
+def f_pay(amount):
+    expire_old_payments()
+    reference = str(uuid.uuid4())
+    payment = Payment(
+        email=current_user.email,
+        amount=amount,
+        reference=reference,
+        gateway="flutterwave",
+        currency="USD",
+        created_at=datetime.now(timezone.utc)
+    )
+    db.session.add(payment)
+    db.session.commit()
+    url = "https://api.flutterwave.com/v3/payments"
+    headers = {
+        "Authorization": f"Bearer {FLUTTERWAVE_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "tx_ref": reference,
+        "amount": amount,
+        "currency": "USD",
+        "redirect_url": url_for("f_payment_callback", _external=True),
+        "customer": {
+            "email": current_user.email
+        },
+        "customizations": {
+            "title": "FolaDevelops",
+            "description": "Payment Checkout"
+        }
+    }
+    response = requests.post(url, json=data, headers=headers)
+    response_json = response.json()
+
+    if not response_json.get("status"):
+        return f"Error: {response_json.get('message')}", 400
+    
+    return redirect(response_json["data"]["link"])
+
+
+@app.route("/f-payment/callback")
+def f_payment_callback():
+    tx_ref = request.args.get("tx_ref")
+    return redirect(url_for("verify_f_payment", reference=tx_ref))
+
+
+@app.route("/verify/f/<reference>")
+def verify_f_payment(reference):
+    url = f"https://api.flutterwave.com/v3/transactions/verify_by_reference?tx_ref={reference}"
+    headers = {"Authorization": f"Bearer {FLUTTERWAVE_SECRET_KEY}"}
+    response = requests.get(url, headers=headers)
+    response_json = response.json()
+    payment = Payment.query.filter_by(reference=reference).first()
+    if not payment:
+        return "Payment record not found", 404
+    if payment.status == "expired":
+        return "Payment expired"
+    if payment.status == "success":
+        return "Payment already marked as success (probably from webhook)", 200
+    if response_json.get("status") == "success":
+        payment.status = "success"
+        payment.paid_at = datetime.now(timezone.utc)
+        db.session.commit()
+        return "Payment successful"
+    payment.status = "failed"
+    db.session.commit()
+    return "Payment failed"
+
+
+@app.route("/flutterwave/webhook", methods=["POST"])
+@csrf.exempt
+def flutterwave_webhook():
+    print('WEBHOOK FIRED BY FLUTTERWAVE!')
+    signature = request.headers.get("verif-hash")
+    if not signature or signature != FLUTTERWAVE_SECRET_HASH:
+        return "Invalid webhook source", 400
+    
+    event = request.get_json()
+    if not event:
+        return "Invalid payload", 400
+    
+    event_type = event.get("type") or event.get("event")
+    if event_type != "charge.completed":
+        return "", 200
+
+    data = event.get("data", {})
+
+    reference = data.get("reference") or data.get("tx_ref")
+    if not reference:
+        return "", 200
+    payment = Payment.query.filter_by(reference=reference).first()
+    if not payment:
+        return "", 200
+    if payment.status in ["expired", "success"]:
+        return "", 200
+    
+    url = f"https://api.flutterwave.com/v3/transactions/verify_by_reference?tx_ref={reference}"
+    headers = {
+        "Authorization": f"Bearer {FLUTTERWAVE_SECRET_KEY}"
+    }
+
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        response_json = response.json()
+        if response_json.get("data", {}).get("status") == "successful":
+            payment.status = "success"
+            payment.paid_at = datetime.now(timezone.utc)
+            db.session.commit()
+    except Exception as e:
+        print(f"Flutterwave verify failed with API error: {e}")
+        return "Retry", 500
+
+    return "", 200
 
 
 # For crawl

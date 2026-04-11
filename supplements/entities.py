@@ -128,6 +128,6 @@ class Payment(UserMixin, db.Model):
     reference: Mapped[str] = mapped_column(String(120), unique=True)
     gateway: Mapped[str] = mapped_column(String(50))
     status: Mapped[str] = mapped_column(String(50), default="pending")
-    currency: Mapped[str] = mapped_column(String(10), default="NGN")
+    currency: Mapped[str] = mapped_column(String(10))
     created_at: Mapped[datetime] = mapped_column(DateTime())
     paid_at: Mapped[datetime] = mapped_column(DateTime(), nullable=True)
