@@ -11,8 +11,8 @@ This project serves as a showcase of my backend and frontend engineering skills,
 
 ## 🚀 Features  
 
-- **Payment System (Paystack Integration)**  
-  - Secure payment processing via Paystack API.  
+- **Payment System (Paystack and Flutterwave Integration)**  
+  - Secure payment processing via Paystack and Flutterwave APIs.  
   - Webhook verification for transaction confirmations.  
   - User-specific payment records and status tracking. 
 
