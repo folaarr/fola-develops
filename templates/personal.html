@@ -34,7 +34,7 @@
     <div class="designs-holder">
         <div class="designs-house">
             <div class="design design-category payment">
-                <p class="text design-type"><b>▲ 1. 💳 Payment System (Paystack Integration)</b></p>
+                <p class="text design-type"><b>▲ 1. 💳 Payment System (Paystack and Flutterwave Integration)</b></p>
             </div>
 
             <div class="payment-designs hidden">
@@ -42,9 +42,10 @@
                     <li class="text">
                         <p class="text">Features:</p>
                         <ul class="features">
-                            <li class="text">Secure payment processing with Paystack</li>
-                            <li class="text">Unique transaction reference tracking</li>
-                            <li class="text">Webhook handling with signature verification</li>
+                            <li class="text">Secure payment processing with Paystack (NGN) and Flutterwave (USD, EUR, GBP, CAD, e.t.c)</li>
+                            <li class="text">Multi-currency support for local and international users</li>
+                            <li class="text">Unique transaction reference tracking across multiple gateways</li>
+                            <li class="text">Webhook handling with signature verification for secure event processing</li>
                             <li class="text">Server-side payment verification (anti-fraud)</li>
                             <li class="text">Payment status handling (success, failed, expired)</li>
                             <li class="text">Idempotent updates to prevent duplicate processing</li>
@@ -64,12 +65,13 @@
                             <li class="text">PostgreSQL</li>
                             <li class="text">SQLAlchemy</li>
                             <li class="text">Paystack API</li>
+                            <li class="text">Flutterwave API</li>
                             <li class="text">Python</li>
                         </ul>
                     </li>
-
-                    <p class="text project-detail">A production-ready payment system that enables real transactions within the platform. Designed with reliability and security in mind, it combines webhook events and server-side verification to ensure accurate payment status handling while preventing fraud and duplicate processing. This system reflects real-world backend architecture used in fintech and e-commerce platforms.</p>
                     
+                    <p class="text project-detail">A production-ready payment system supporting both local and international transactions. It integrates Paystack and Flutterwave to enable reliable multi-currency payments, combining webhook events with server-side verification to ensure accurate transaction processing. Designed with reliability and security in mind, this system combines webhook events and server-side verification to ensure accurate payment status handling while preventing fraud and duplicate processing, reflecting real-world backend architecture used in fintech and e-commerce platforms.</p>
+
                     <li class="text uploader-instruction">Requires the user to be logged in</li>
                     <li class="text">
                         <a class="text preview-button" href="{{url_for('input_amount')}}">Preview</a>

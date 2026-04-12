@@ -192,9 +192,9 @@ $("span.touch-designs").click(function () {
 $("div.payment").click(() => {
     $("div.payment-designs").toggleClass("hidden");
     if ($("div.payment-designs").hasClass("hidden")) {
-        $("div.payment").html('<p class="text design-type"><b>▲ 1. 💳 Payment System (Paystack Integration)</b></p>');
+        $("div.payment").html('<p class="text design-type"><b>▲ 1. 💳 Payment System (Paystack and Flutterwave Integration)</b></p>');
     } else {
-        $("div.payment").html('<p class="text design-type"><b>▼ 1. 💳 Payment System (Paystack Integration)</b></p>');
+        $("div.payment").html('<p class="text design-type"><b>▼ 1. 💳 Payment System (Paystack and Flutterwave Integration)</b></p>');
     }
 });
 $("div.application").click(() => {
