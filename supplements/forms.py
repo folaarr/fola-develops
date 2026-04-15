@@ -133,8 +133,8 @@ class AmountForm(FlaskForm):
     gateway = SelectField(
         "Payment Method",
         choices=[
-            ("flutterwave", "GBP (Flutterwave)"),
-            ("paystack", "NGN (Paystack)")
+            ("paystack", "NGN (Paystack)"),
+            ("flutterwave", "GBP (Flutterwave)")
         ],
         render_kw={"class": "field"}
     )
