@@ -1,13 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import './App.css';
-import GalleryHome from './pages/GalleryHome';
+import Gallery from './pages/Gallery';
 import Picture from './pages/Picture';
 
 
 function App() {
   const router = createBrowserRouter(
     [
-      {path: "/", Component: GalleryHome}, 
+      {path: "/", Component: Gallery}, 
       {path: "/picture", Component: Picture}
     ], 
     {basename: "/gallery"}
