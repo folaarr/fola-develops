@@ -4,7 +4,7 @@ export default function Picture() {
     return (
         <>
             <p>Pictures Page.</p>
-            <Link to="/gallery">Go to Gallery Home</Link>
+            <Link to="/gallery">Go to Gallery</Link>
         </>
     );
 };
