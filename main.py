@@ -1344,9 +1344,7 @@ def flutterwave_webhook():
 @app.route("/gallery")
 @app.route("/gallery/<path:path>")
 def gallery(path=None):
-    print('Hit gallery')
-    # return render_template("gallery.html")
-    return redirect('http://localhost:3000/gallery')
+    return render_template("gallery.html")
 
 
 # For crawl
