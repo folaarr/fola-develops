@@ -7,10 +7,10 @@ import Picture from './pages/Picture';
 function App() {
   const router = createBrowserRouter(
     [
-      {path: "/", Component: Gallery}, 
+      {path: "/gallery", Component: Gallery}, 
       {path: "/picture", Component: Picture}
     ], 
-    {basename: "/gallery"}
+    {basename: "/app"}
   );
 
   return (

@@ -1341,9 +1341,10 @@ def flutterwave_webhook():
 
 
 # React intergration attempt start
-@app.route("/gallery")
-@app.route("/gallery/<path:path>")
+@app.route("/app/gallery")
+@app.route("/app/gallery/<path:path>")
 def gallery(path=None):
+    # return redirect("http://localhost:3000/app/gallery")
     return render_template("gallery.html")
 
 
