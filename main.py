@@ -43,6 +43,7 @@ from flask_jwt_extended import JWTManager, create_access_token, create_refresh_t
 import uuid
 import hashlib
 import hmac
+from flask_migrate import Migrate
 
 
 load_dotenv()
@@ -55,6 +56,8 @@ app.config["SECRET_KEY"] = os.environ.get("FLASK-SECRET-KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE-URI")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
 db.init_app(app)
+
+migrate = Migrate(app, db)
 
 app.config["UPLOAD_FOLDER"] = "static/images/uploads"
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "webp", "jfif"}

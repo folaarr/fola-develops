@@ -46,6 +46,7 @@ class User(UserMixin, db.Model):
     cart_products = relationship("CartProduct", back_populates="user")
     orders = relationship("Order", back_populates="user")
     ai_chats = relationship("AiChat", back_populates="user")
+    phone_number: Mapped[int] = mapped_column(Integer(), nullable=True)  # For testing migrations
 
 
 class Note(UserMixin, db.Model):
