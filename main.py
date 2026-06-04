@@ -37,7 +37,7 @@ from email.mime.text import MIMEText
 from supplements.email_templates import verify_one, verify_two, reset_one, reset_two, email_brand, before_greeting, before_datetime, after_datetime, before_number, before_image, before_name, before_quantity, before_price, after_price, before_total, after_total
 from functools import wraps
 from supplements.items_data import things
-from flask_cors import CORS
+# from flask_cors import CORS
 from supplements.ai_skeleton import system_instructions, chat_ai, identify_chat, accumulate_chat, message_ai
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 import uuid
@@ -45,7 +45,6 @@ import hashlib
 import hmac
 from flask_migrate import Migrate
 
-# Start attempt to convert to a vercel deployable program
 
 load_dotenv()
 
@@ -98,7 +97,7 @@ FLUTTERWAVE_PUBLIC_KEY = os.environ.get("FLUTTERWAVE_TEST_PUBLIC_KEY")
 # FLUTTERWAVE_ENCRYPTION_KEY = os.environ.get("FLUTTERWAVE_LIVE_ENCRYPTION_KEY")
 FLUTTERWAVE_SECRET_HASH = os.environ.get("FLASK-SECRET-KEY")
 
-CORS(app)
+# CORS(app)
 
 with app.app_context():
     db.create_all()
@@ -1369,5 +1368,4 @@ def favicon():
     return send_from_directory('static', 'favico.ico')
 
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+
