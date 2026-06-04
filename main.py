@@ -45,6 +45,7 @@ import hashlib
 import hmac
 from flask_migrate import Migrate
 
+# Start attempt to convert to a vercel deployable program
 
 load_dotenv()
 
