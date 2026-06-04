@@ -52,8 +52,8 @@ app = Flask(__name__)
 
 csrf = CSRFProtect(app)
 
-app.config["SECRET_KEY"] = os.environ.get("FLASK-SECRET-KEY")
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE-URI")
+app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
 db.init_app(app)
 
@@ -63,15 +63,15 @@ app.config["UPLOAD_FOLDER"] = "static/images/uploads"
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "webp", "jfif"}
 # app.config["MAX_CONTENT_LENGTH"] = 8 * 1000 * 1000
 
-url = os.environ.get("API-URL")
-i_d_ = os.environ.get("ID-INSTANCE")
-key = os.environ.get("API-TOKEN-INSTANCE")
+url = os.environ.get("API_URL")
+i_d_ = os.environ.get("ID_INSTANCE")
+key = os.environ.get("API_TOKEN_INSTANCE")
 number = os.environ.get("NUMBER")
 
 email = os.environ.get("EMAIL")
 password = os.environ.get("PASSWORD")
 
-video_url = os.environ.get("VIDEO-URL")
+video_url = os.environ.get("VIDEO_URL")
 
 gemini_key = os.environ.get("GEMINI_API_KEY")
 
@@ -81,7 +81,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login" 
 
-admin_email = os.environ.get("ADMIN-EMAIL")
+admin_email = os.environ.get("ADMIN_EMAIL")
 
 admin_emails = [admin_email, "view@foladevelops.onrender.com"]
 
@@ -95,7 +95,7 @@ PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_TEST_PUBLIC_KEY")
 FLUTTERWAVE_SECRET_KEY = os.environ.get("FLUTTERWAVE_TEST_SECRET_KEY")
 FLUTTERWAVE_PUBLIC_KEY = os.environ.get("FLUTTERWAVE_TEST_PUBLIC_KEY")
 # FLUTTERWAVE_ENCRYPTION_KEY = os.environ.get("FLUTTERWAVE_LIVE_ENCRYPTION_KEY")
-FLUTTERWAVE_SECRET_HASH = os.environ.get("FLASK-SECRET-KEY")
+FLUTTERWAVE_SECRET_HASH = os.environ.get("FLASK_SECRET_KEY")
 
 # CORS(app)
 
