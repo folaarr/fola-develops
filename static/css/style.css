@@ -283,7 +283,7 @@ p, a {
         display: flex;
         flex-direction: column;
         /* min-height: 90vh; */
-        padding: 0vh 12vw;
+        padding: 0vh 0vw;
         font-size: 3vw;
         /* margin-top: 20vw; */
         height: 100vh;
