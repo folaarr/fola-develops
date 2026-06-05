@@ -120,6 +120,15 @@ def admin_only(f):
     return decorated_function
 
 
+@app.before_request
+def redirect_to_custom_domain():
+    if request.host == "foladevelops.onrender.com":
+        url = f"https://foladevelops.com{request.path}"
+        if request.query_string:
+            url += f"?{request.query_string.decode()}"
+        return redirect(url, code=301)
+
+
 @app.route("/")
 def home():
     return render_template("index.html", video_url=video_url)
