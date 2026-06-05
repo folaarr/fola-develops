@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://foladevelops.onrender.com/sitemap.xml
+Sitemap: https://foladevelops.com/sitemap.xml
