@@ -1367,5 +1367,6 @@ def robots():
 def favicon():
     return send_from_directory('static', 'favico.ico')
 
-
-
+# TEMPORARY
+# if __name__ == "__main__":
+#     app.run(debug=True)
