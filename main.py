@@ -52,8 +52,8 @@ app = Flask(__name__)
 
 csrf = CSRFProtect(app)
 
-app.config["SECRET_KEY"] = os.environ.get("FLASK-SECRET-KEY")
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE-URI")
+app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
 db.init_app(app)
 
