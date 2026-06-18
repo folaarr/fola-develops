@@ -245,12 +245,20 @@ $("div.personal").click(() => {
         $("div.personal").html('<p class="text design-type"><b>▼ 7. 📤 Picture Upload Manager</b></p>');
     }
 });
+$("div.blogg").click(() => {
+    $("div.blogg-designs").toggleClass("hidden");
+    if ($("div.blogg-designs").hasClass("hidden")) {
+        $("div.blogg").html('<p class="text design-type"><b>▲ 1. 🏡 Tomaht</b></p>');
+    } else {
+        $("div.blogg").html('<p class="text design-type"><b>▼ 1. 🏡 Tomaht</b></p>');
+    }
+});
 $("div.businesss").click(() => {
     $("div.businesss-designs").toggleClass("hidden");
     if ($("div.businesss-designs").hasClass("hidden")) {
-        $("div.businesss").html('<p class="text design-type"><b>▲ 1. 🌮 QuickBite</b></p>');
+        $("div.businesss").html('<p class="text design-type"><b>▲ 2. 🌮 QuickBite</b></p>');
     } else {
-        $("div.businesss").html('<p class="text design-type"><b>▼ 1. 🌮 QuickBite</b></p>');
+        $("div.businesss").html('<p class="text design-type"><b>▼ 2. 🌮 QuickBite</b></p>');
     }
 });
 
