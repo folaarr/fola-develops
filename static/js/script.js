@@ -189,20 +189,20 @@ $("span.touch-designs").click(function () {
 
 
 //  Projects page
-$("div.payment").click(() => {
-    $("div.payment-designs").toggleClass("hidden");
-    if ($("div.payment-designs").hasClass("hidden")) {
-        $("div.payment").html('<p class="text design-type"><b>▲ 1. 💳 Payment System (Paystack and Flutterwave Integration)</b></p>');
-    } else {
-        $("div.payment").html('<p class="text design-type"><b>▼ 1. 💳 Payment System (Paystack and Flutterwave Integration)</b></p>');
-    }
-});
 $("div.application").click(() => {
     $("div.application-designs").toggleClass("hidden");
     if ($("div.application-designs").hasClass("hidden")) {
-        $("div.application").html('<p class="text design-type"><b>▲ 2. 📱 Mobile App</b></p>');
+        $("div.application").html('<p class="text design-type"><b>▲ 1. 🛒 Cart Saver | Business Cart Management App</b></p>');
     } else {
-        $("div.application").html('<p class="text design-type"><b>▼ 2. 📱 Mobile App</b></p>');
+        $("div.application").html('<p class="text design-type"><b>▼ 1. 🛒 Cart Saver | Business Cart Management App</b></p>');
+    }
+});
+$("div.payment").click(() => {
+    $("div.payment-designs").toggleClass("hidden");
+    if ($("div.payment-designs").hasClass("hidden")) {
+        $("div.payment").html('<p class="text design-type"><b>▲ 2. 💳 Payment System (Paystack and Flutterwave Integration)</b></p>');
+    } else {
+        $("div.payment").html('<p class="text design-type"><b>▼ 2. 💳 Payment System (Paystack and Flutterwave Integration)</b></p>');
     }
 });
 $("div.business").click(() => {
